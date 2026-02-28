@@ -32,7 +32,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 
 1. VS Code'u aç
 2. Uzantılar paneline git (Ctrl+Shift+X)
-3. "Note Collection" veya "笔记收藏集" ara
+3. "Not Collection" ya da "Notlar Koleksiyonu" ara [uzantı markette](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Yükle'yi tıkla
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 ![](../image/path-2.gif)
 
 - Bir dosya taşınmış veya silinmişse, bir uyarı simgesi ve mesaj görünecektir.
+
 ![](../image/fileerror.png)
 
 - Daha fazla işlemlerde manuel olarak yollar da girebilirsiniz, bu daha fazla yol girmek için özel bir Webview paneli açar.
@@ -81,6 +82,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
         D:\yol\dosya1.txt
         D:\yol\dosya2.txt
         ```
+		
 ![](../image/path-1.png)
 
 #### Etiketleri yönetme

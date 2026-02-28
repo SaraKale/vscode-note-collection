@@ -1,6 +1,6 @@
 {
   "displayName": "Notizsammlung",
-  "description": " Eine Erweiterung zum Verwalten und Sammeln von Notizdateien mit Tags.",
+  "description": "Eine VSCode-Erweiterung zum Verwalten und Sammeln von Notizdateien mit Tags. Organisieren Sie Ihre Notizen effizient durch eine saubere und intuitive Benutzeroberfläche.",
   "noteCollection.title": "Notizsammlung",
   "noteCollection.list.title": "Notizsammlung",
   "noteCollection.editList.title": "Notizliste bearbeiten",

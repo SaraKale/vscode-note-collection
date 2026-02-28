@@ -32,7 +32,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. Открыть VS Code
 2. Перейти к панели расширений (Ctrl+Shift+X)
-3. Поиск "Note Collection" или "笔记收藏集"
+3. Поиск "Note Collection" или "коллекция заметок" или [установить из Marketplace](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Нажать "Установить"
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/path-2.gif)
 
 - Если файл перемещен или удален, появится предупреждающий значок и сообщение.
+
 ![](../image/fileerror.png)
 
 - Вы также можете вручную вводить пути в дополнительных операциях, что откроет выделенную панель Webview для ввода большего количества путей.
@@ -81,6 +82,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+		
 ![](../image/path-1.png)
 
 #### Управление тегами

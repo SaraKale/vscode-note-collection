@@ -1,6 +1,6 @@
 {
   "displayName": "Not Koleksiyonu",
-  "description": "Etiketli not dosyalarını yönetmek ve toplamak için bir eklenti.",
+  "description": "Etiketli not dosyalarını yönetmek ve toplamak için bir VSCode uzantısı. Temiz ve sezgisel bir arayüz aracılığıyla notlarınızı verimli bir şekilde düzenleyin.",
   "noteCollection.title": "Not Koleksiyonu",
   "noteCollection.list.title": "Not Koleksiyonu",
   "noteCollection.editList.title": "Not Listesini Düzenle",

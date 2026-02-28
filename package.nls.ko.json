@@ -1,6 +1,6 @@
 {
   "displayName": "노트 컬렉션",
-  "description": "태그로 노트 파일을 관리하고 수집하는 플러그인입니다.",
+  "description": "태그가 지정된 노트 파일을 관리하고 수집하는 VSCode 확장 프로그램입니다. 깔끔하고 직관적인 인터페이스를 통해 노트를 효율적으로 구성하세요.",
   "noteCollection.title": "노트 컬렉션",
   "noteCollection.list.title": "노트 컬렉션",
   "noteCollection.editList.title": "노트 목록 편집",

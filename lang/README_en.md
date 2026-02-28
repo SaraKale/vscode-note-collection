@@ -32,7 +32,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 
 1. Open VS Code
 2. Go to Extensions panel (Ctrl+Shift+X)
-3. Search "Note Collection" or "笔记收藏集"
+3. Search "Note Collection" or [marketplace install](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Click Install
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 ![](../image/path-2.gif)
 
 - If a file is moved or deleted, a warning icon and prompt will appear.
+
 ![](../image/fileerror.png)
 
 - You can also manually enter paths in more operations, which will open a dedicated Webview panel to enter more paths.
@@ -81,6 +82,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Managing Tags

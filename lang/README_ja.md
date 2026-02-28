@@ -32,7 +32,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. VS Code を開く
 2. 拡張機能パネルに移動（Ctrl+Shift+X）
-3. "Note Collection" または "笔记收藏集" を検索
+3. 「Note Collection」または「ノートコレクション」を検索するか、[拡張機能マーケットでインストール](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. インストールをクリック
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/path-2.gif)
 
 - ファイルが移動または削除された場合、警告アイコンとメッセージが表示されます。
+
 ![](../image/fileerror.png)
 
 - その他の操作で手動でパスを入力することもできます。これにより、より多くのパスを入力するための専用の Webview パネルが開きます。
@@ -81,6 +82,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+		
 ![](../image/path-1.png)
 
 #### タグの管理

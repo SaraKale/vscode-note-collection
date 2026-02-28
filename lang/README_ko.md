@@ -32,7 +32,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. VS Code 열기
 2. 확장 패널로 이동 (Ctrl+Shift+X)
-3. "Note Collection" 또는 "笔记收藏集" 검색
+3. "Note Collection" 또는 "노트 컬렉션" 또는 [확장 시장 설치](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection) 검색
 4. 설치 클릭
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/path-2.gif)
 
 - 파일이 이동되거나 삭제된 경우 경고 아이콘과 메시지가 나타납니다.
+
 ![](../image/fileerror.png)
 
 - 추가 작업에서 수동으로 경로를 입력할 수도 있습니다. 이렇게 하면 더 많은 경로를 입력하기 위한 전용 Webview 패널이 열립니다.
@@ -81,6 +82,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+		
 ![](../image/path-1.png)
 
 #### 태그 관리

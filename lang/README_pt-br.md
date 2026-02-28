@@ -32,7 +32,7 @@ Uma extensão do VS Code para gerenciar e coletar arquivos de notas etiquetados.
 
 1. Abrir o VS Code
 2. Ir para o painel de Extensões (Ctrl+Shift+X)
-3. Pesquisar "Note Collection" ou "笔记收藏集"
+3. Pesquise por "Note Collection" ou "Coleção de notas" ou [instale no Marketplace](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Clicar em Instalar
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Uma extensão do VS Code para gerenciar e coletar arquivos de notas etiquetados.
 ![](../image/path-2.gif)
 
 - Se um arquivo for movido ou excluído, aparecerá um ícone de aviso e uma mensagem.
+
 ![](../image/fileerror.png)
 
 - Você também pode inserir caminhos manualmente em mais operações, que abrirá um painel Webview dedicado para inserir mais caminhos.
@@ -81,6 +82,7 @@ Uma extensão do VS Code para gerenciar e coletar arquivos de notas etiquetados.
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Gerenciar etiquetas

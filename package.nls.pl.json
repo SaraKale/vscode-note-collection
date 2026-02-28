@@ -1,6 +1,6 @@
 {
   "displayName": "Kolekcja notatek",
-  "description": "Wtyczka do zarządzania i zbierania plików z notatkami z tagami.",
+  "description": "Rozszerzenie VSCode do zarządzania i zbierania plików z notatkami z tagami. Organizuj swoje notatki wydajnie za pomocą przejrzystego i intuicyjnego interfejsu.",
   "noteCollection.title": "Kolekcja notatek",
   "noteCollection.list.title": "Kolekcja notatek",
   "noteCollection.editList.title": "Edytuj listę notatek",

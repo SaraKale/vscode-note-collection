@@ -1,6 +1,6 @@
 {
   "displayName": "Coleção de Notas",
-  "description": "Uma extensão para gerenciar e coletar arquivos de notas com tags.",
+  "description": "Uma extensão do VSCode para gerenciar e coletar arquivos de notas com tags. Organize suas notas de forma eficiente através de uma interface limpa e intuitiva.",
   "noteCollection.title": "Coleção de Notas",
   "noteCollection.list.title": "Coleção de Notas",
   "noteCollection.editList.title": "Editar lista de notas",

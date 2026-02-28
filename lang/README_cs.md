@@ -32,7 +32,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 
 1. Otevřít VS Code
 2. Přejít na panel rozšíření (Ctrl+Shift+X)
-3. Najít "Note Collection" nebo "笔记收藏集"
+3. Vyhledej "Note Collection" nebo "Note Collection" nebo [nainstaluj z Marketplace](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Kliknout na Instalovat
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 ![](../image/path-2.gif)
 
 - Pokud je soubor přesunut nebo odstraněn, objeví se ikona varování a zpráva.
+
 ![](../image/fileerror.png)
 
 - Můžete také ručně zadávat cesty v dalších operacích, což otevře vyhrazený panel Webview pro zadání více cest.
@@ -81,6 +82,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
         D:\cesta\file1.txt
         D:\cesta\file2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Správa štítků

@@ -32,7 +32,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 
 1. Abra VS Code
 2. Vaya al panel de extensiones (Ctrl+Shift+X)
-3. Busque "Note Collection" o "笔记收藏集"
+3. Buscar "Note Collection" o "Colección de notas" o [instalar en el mercado de extensiones](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Haga clic en Instalar
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 ![](../image/path-2.gif)
 
 - Si un archivo se mueve o elimina, aparecerá un icono de advertencia y un mensaje.
+
 ![](../image/fileerror.png)
 
 - También puede ingresar rutas manualmente en más operaciones, lo que abrirá un panel Webview dedicado para ingresar más rutas.
@@ -81,6 +82,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
         D:\ruta\archivo1.txt
         D:\ruta\archivo2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Gestionar etiquetas

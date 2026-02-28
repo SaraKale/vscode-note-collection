@@ -1,6 +1,6 @@
 {
   "displayName": "笔记收藏集",
-  "description": "一个用于管理和收集带标签笔记文件的 VS Code 扩展。通过简洁直观的界面，高效地整理您的笔记。",
+  "description": "一个用于管理和收集带标签笔记文件的 VSCode 扩展。通过简洁直观的界面，高效地整理您的笔记。",
   "noteCollection.title": "笔记收藏集",
   "noteCollection.list.title": "笔记收藏集",
   "noteCollection.editList.title": "编辑笔记列表",

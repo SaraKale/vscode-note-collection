@@ -1,6 +1,6 @@
 {
   "displayName": "Collection de notes",
-  "description": "Une extension pour gérer et collecter des fichiers de notes avec des étiquettes.",
+  "description": "Une extension VSCode pour gérer et collecter des fichiers de notes avec des étiquettes. Organisez efficacement vos notes grâce à une interface propre et intuitive.",
   "noteCollection.title": "Collection de notes",
   "noteCollection.list.title": "Collection de notes",
   "noteCollection.editList.title": "Modifier la liste des notes",

@@ -32,7 +32,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 
 1. Otwórz VS Code
 2. Przejdź do panelu Extensje (Ctrl+Shift+X)
-3. Szukaj "Note Collection" lub "笔记收藏集"
+3. Wyszukaj "Note Collection" lub "Kolekcja notatek" lub [zainstaluj z Rynku Rozszerzeń](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Kliknij Zainstaluj
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 ![](../image/path-2.gif)
 
 - Jeśli plik zostanie przeniesiony lub usunięty, pojawi się ikona ostrzeżenia i wiadomość.
+
 ![](../image/fileerror.png)
 
 - Możesz również ręcznie wprowadzać ścieżki w więcej operacji, co otworzy dedykowany panel Webview do wprowadzania większej liczby ścieżek.
@@ -81,6 +82,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Zarządzanie tagami

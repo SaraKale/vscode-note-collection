@@ -1,6 +1,6 @@
 {
   "displayName": "筆記收藏集",
-  "description": "一個用於管理和收集標籤筆記文件的插件。",
+  "description": "一個用於管理和收集標籤筆記文件的 VSCode 擴充功能。透過簡潔直觀的介面，有效率地整理您的筆記。",
   "noteCollection.title": "筆記收藏集",
   "noteCollection.list.title": "筆記收藏集",
   "noteCollection.editList.title": "編輯筆記列表",

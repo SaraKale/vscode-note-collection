@@ -32,7 +32,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. 開啟 VS Code
 2. 進入擴充功能面板 (Ctrl+Shift+X)
-3. 搜尋 "Note Collection" 或 "筆記收藏集"
+3. 搜尋 "Note Collection" 或 "筆記收藏集" 或 [擴展市場安裝](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. 點擊安裝
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/path-2.gif)
 
 - 如果檔案被移動或刪除，會有警告圖示和提示。
+
 ![](../image/fileerror.png)
 
 - 也可以在更多操作中手動輸入位址，會開啟一個專用的 Webview 面板來輸入更多位址。

@@ -30,12 +30,12 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 
 ### Install from VS Code Marketplace
 
-1. Open VS Code
+1. Open VSCode
 2. Go to Extensions panel (Ctrl+Shift+X)
-3. Search "Note Collection" or "笔记收藏集"
+3. Search "Note Collection" or [marketplace install](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Click Install
 
-![extensions-1](image/extensions-1.png)
+![extensions-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/extensions-1.png)
 
 ### Install from VSIX file
 
@@ -45,7 +45,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 4. Select "Extensions: Install from VSIX..."
 5. Select the downloaded `.vsix` file
 
-![extensions-2](image/extensions-2.png)
+![extensions-2](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/extensions-2.png)
 
 ## Usage
 
@@ -62,14 +62,15 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 
 - Right-click on a tag, select "Import Files/Folders..." to add note files/folders
 
-![menu-1](image/menu-1.png)
+![menu-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/menu-1.png)
 
 - Drag files/folders from file explorer into tags
 
-![path-2](image/path-2.gif)
+![path-2](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/path-2.gif)
 
 - If a file is moved or deleted, a warning icon and prompt will appear.
-![fileerror](image/fileerror.png)
+
+![fileerror](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/fileerror.png)
 
 - You can also manually enter paths in more operations, which will open a dedicated Webview panel to enter more paths.
     - Tag entry, you can enter multiple tags separated by English commas:
@@ -81,7 +82,8 @@ A VS Code extension for managing and collecting tagged note files. Organize your
         D:\path\file1.txt
         D:\path\file2.txt
         ```
-![path-1](image/path-1.png)
+		
+![path-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/path-1.png)
 
 #### Managing Tags
 
@@ -91,11 +93,11 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 - Click the collapse icon to expand/collapse all tag content
 - You can also move tags into other tags
 
-![tag-1](image/tag-1.png)
+![tag-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/tag-1.png)
 
-![tag-2](image/tag-2.gif)
+![tag-2](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/tag-2.gif)
 
-![tag-3](image/tag-3.gif)
+![tag-3](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/tag-3.gif)
 
 #### Searching Notes
 - Click the search icon in the toolbar
@@ -103,7 +105,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 - Displays up to 50 matching results
 - Only supports common text formats; images/documents/videos will only search for filenames. Binary files require third-party full-text search software, such as: Recoll, DocFetcher, etc.
 
-![search-1](image/search-1.gif)
+![search-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/search-1.gif)
 
 #### Note Operations
 - **Open**: Double-click or select "Open File" from right-click menu
@@ -113,7 +115,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 - **Delete Note**: Remove notes from the collection
 - **Enable/Disable**: Hide/show note file items without actually deleting the file.
 
-![menu-2](image/menu-2.png)
+![menu-2](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/menu-2.png)
 
 ### Export TXT / Import Export JSON Backup Files
 
@@ -126,7 +128,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 
 ## Screenshots
 
-![screen-1](image/screen-1.png)
+![screen-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/screen-1.png)
 
 ## Requirements
 

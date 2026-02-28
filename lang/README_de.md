@@ -32,7 +32,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 
 1. Öffnen Sie VS Code
 2. Gehen Sie zum Erweiterungsbereich (Ctrl+Shift+X)
-3. Suchen Sie nach "Note Collection" oder "笔记收藏集"
+3. Suchen Sie nach "Note Collection" oder "Notizensammlung" oder [erweitern Sie den Markt](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Klicken Sie auf Installieren
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 ![](../image/path-2.gif)
 
 - Wenn eine Datei verschoben oder gelöscht wurde, erscheint ein Warnsymbol und eine Meldung.
+
 ![](../image/fileerror.png)
 
 - Sie können Pfade auch manuell in weiteren Operationen eingeben, was ein dediziertes Webview-Panel zum Eingeben weiterer Pfade öffnet.
@@ -81,6 +82,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+
 ![](../image/path-1.png)
 
 #### Tags verwalten

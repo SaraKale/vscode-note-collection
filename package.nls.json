@@ -1,6 +1,6 @@
 {
   "displayName": "Note Collection",
-  "description": "A plugin to manage and collect note files with tags.",
+  "description": "A VSCode extension for managing and collecting tagged note files. Organize your notes efficiently through a clean and intuitive interface.",
   "noteCollection.title": "Note Collection",
   "noteCollection.list.title": "Note Collection",
   "noteCollection.editList.title": "Edit Note List",

@@ -1,6 +1,6 @@
 {
   "displayName": "ノートコレクション",
-  "description": "タグ付きノートファイルを管理・収集するプラグイン。",
+  "description": "タグ付きノートファイルを管理・収集するVSCode拡張機能。クリーンで直感的なインターフェースを通じて効率的にノートを整理します。",
   "noteCollection.title": "ノートコレクション",
   "noteCollection.list.title": "ノートコレクション",
   "noteCollection.editList.title": "ノートリストを編集",

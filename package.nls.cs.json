@@ -1,6 +1,6 @@
 {
   "displayName": "Kolekce poznámek",
-  "description": "Plugin pro správu a sběr souborů poznámek se štítky.",
+  "description": "Rozšíření VSCode pro správu a sběr souborů poznámek se štítky. Efektivně organizujte své poznámky prostřednictvím čistého a intuitivního rozhraní.",
   "noteCollection.title": "Kolekce poznámek",
   "noteCollection.list.title": "Kolekce poznámek",
   "noteCollection.editList.title": "Upravit seznam poznámek",

@@ -1,6 +1,6 @@
 {
   "displayName": "Raccolta note",
-  "description": "Un'estensione per gestire e raccogliere file di note con etichette.",
+  "description": "Un'estensione VSCode per gestire e raccogliere file di note con etichette. Organizza le tue note in modo efficiente attraverso un'interfaccia pulita e intuitiva.",
   "noteCollection.title": "Raccolta note",
   "noteCollection.list.title": "Raccolta note",
   "noteCollection.editList.title": "Modifica elenco note",

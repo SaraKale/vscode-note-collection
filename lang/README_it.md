@@ -32,7 +32,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 
 1. Apri VS Code
 2. Vai al pannello Estensioni (Ctrl+Shift+X)
-3. Cerca "Note Collection" o "笔记收藏集"
+3. Cerca "Note Collection" o "Collezione di appunti" o [installa dal Marketplace](https://marketplace.visualstudio.com/items?itemName=SaraKale.note-collection)
 4. Clicca su Installa
 
 ![](../image/extensions-1.png)
@@ -69,6 +69,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 ![](../image/path-2.gif)
 
 - Se un file viene spostato o cancellato, apparirà un'icona di avviso e un messaggio.
+
 ![](../image/fileerror.png)
 
 - Puoi anche inserire manualmente i percorsi in ulteriori operazioni, che aprirà un pannello Webview dedicato per inserire più percorsi.
@@ -81,6 +82,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
         D:\path\file1.txt
         D:\path\file2.txt
         ```
+		
 ![](../image/path-1.png)
 
 #### Gestire tag
