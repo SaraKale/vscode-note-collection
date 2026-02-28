@@ -1,0 +1,278 @@
+{
+  "name": "note-collection",
+  "displayName": "%displayName%",
+  "description": "%description%",
+  "version": "1.0.0",
+  "publisher": "SaraKale",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Notebooks",
+    "Other",
+    "Visualization"
+  ],
+  "tgas": [
+    "note",
+    "notes",
+    "notebooks",
+    "collection",
+    "tag",
+    "organize",
+    "manage",
+    "productivity",
+    "bookmark"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "l10n": "./l10n",
+  "icon": "media/icon.png",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sarakale/vscode-note-collection"
+  },
+  "bugs": {
+    "url": "https://github.com/sarakale/vscode-note-collection/issues"
+  },
+  "homepage": "https://github.com/sarakale/vscode-note-collection",
+  "keywords": [
+    "note",
+    "notes",
+    "Notebooks",
+    "collection",
+    "tag",
+    "organize",
+    "manage",
+    "productivity",
+    "bookmark"
+  ],
+  "author": {
+    "name": "SaraKale"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "noteCollection",
+          "title": "%noteCollection.title%",
+          "icon": "media/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "noteCollection": [
+        {
+          "id": "noteCollection.list",
+          "name": "%noteCollection.list.title%",
+          "title": "%noteCollection.list.title%",
+          "icon": "media/icon.png"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "noteCollection.editList",
+        "title": "%noteCollection.editList.title%",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "noteCollection.toggleCollapse",
+        "title": "%noteCollection.toggleCollapse.title%",
+        "icon": "$(collapse-all)"
+      },
+      {
+        "command": "noteCollection.search",
+        "title": "%noteCollection.search.title%",
+        "icon": "$(search)"
+      },
+      {
+        "command": "noteCollection.refresh",
+        "title": "%noteCollection.refresh.title%",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "noteCollection.more",
+        "title": "%noteCollection.more.title%",
+        "icon": "$(more)"
+      },
+      {
+        "command": "noteCollection.openFile",
+        "title": "%noteCollection.openFile.title%"
+      },
+      {
+        "command": "noteCollection.openInNewWindow",
+        "title": "%noteCollection.openInNewWindow.title%"
+      },
+      {
+        "command": "noteCollection.revealInExplorer",
+        "title": "%noteCollection.revealInExplorer.title%"
+      },
+      {
+        "command": "noteCollection.deleteItem",
+        "title": "%noteCollection.deleteItem.title%"
+      },
+      {
+        "command": "noteCollection.disableItem",
+        "title": "%noteCollection.disableItem.title%"
+      },
+      {
+        "command": "noteCollection.editTags",
+        "title": "%noteCollection.editTags.title%"
+      },
+      {
+        "command": "noteCollection.renameItem",
+        "title": "%noteCollection.renameItem.title%"
+      },
+      {
+        "command": "noteCollection.exportTxt",
+        "title": "%noteCollection.exportTxt.title%"
+      },
+      {
+        "command": "noteCollection.backup",
+        "title": "%noteCollection.backup.title%"
+      },
+      {
+        "command": "noteCollection.importBackup",
+        "title": "%noteCollection.importBackup.title%"
+      },
+      {
+        "command": "noteCollection.addTag",
+        "title": "%noteCollection.addTag.title%"
+      },
+      {
+        "command": "noteCollection.deleteTag",
+        "title": "%noteCollection.deleteTag.title%"
+      },
+      {
+        "command": "noteCollection.deleteTagWithChildren",
+        "title": "%noteCollection.deleteTagWithChildren%"
+      },
+      {
+        "command": "noteCollection.importFiles",
+        "title": "%noteCollection.importFiles.title%"
+      },
+      {
+        "command": "noteCollection.renameTag",
+        "title": "%noteCollection.renameTag.title%"
+      },
+      {
+        "command": "noteCollection.toggleCollapseTag",
+        "title": "%noteCollection.toggleCollapseTag.title%"
+      },
+      {
+        "command": "noteCollection.importFromText",
+        "title": "%noteCollection.importFromText.title%"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "noteCollection.editList",
+          "when": "view == noteCollection.list",
+          "group": "navigation"
+        },
+        {
+          "command": "noteCollection.toggleCollapse",
+          "when": "view == noteCollection.list",
+          "group": "navigation"
+        },
+        {
+          "command": "noteCollection.search",
+          "when": "view == noteCollection.list",
+          "group": "navigation"
+        },
+        {
+          "command": "noteCollection.refresh",
+          "when": "view == noteCollection.list",
+          "group": "navigation"
+        },
+        {
+          "command": "noteCollection.more",
+          "when": "view == noteCollection.list",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "noteCollection.openFile",
+          "when": "view == noteCollection.list && viewItem == file"
+        },
+        {
+          "command": "noteCollection.openInNewWindow",
+          "when": "view == noteCollection.list && viewItem == file"
+        },
+        {
+          "command": "noteCollection.revealInExplorer",
+          "when": "view == noteCollection.list && viewItem == file"
+        },
+        {
+          "command": "noteCollection.deleteItem",
+          "when": "view == noteCollection.list && viewItem == file",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.disableItem",
+          "when": "view == noteCollection.list && viewItem == file",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.editTags",
+          "when": "view == noteCollection.list && viewItem == file",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.renameItem",
+          "when": "view == noteCollection.list && viewItem == file",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.importFiles",
+          "when": "view == noteCollection.list && viewItem == tag",
+          "group": "1_actions"
+        },
+        {
+          "command": "noteCollection.addTag",
+          "when": "view == noteCollection.list",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.renameTag",
+          "when": "view == noteCollection.list && viewItem == tag",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.deleteTagWithChildren",
+          "when": "view == noteCollection.list && viewItem == tag",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.toggleCollapseTag",
+          "when": "view == noteCollection.list && viewItem == tag",
+          "group": "1_actions"
+        },
+        {
+          "command": "noteCollection.importFiles",
+          "when": "view == noteCollection.list && viewItem == folder",
+          "group": "1_actions"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@vscode/l10n-dev": "^0.0.35"
+  }
+}
