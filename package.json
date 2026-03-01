@@ -2,7 +2,7 @@
   "name": "note-collection",
   "displayName": "%displayName%",
   "description": "%description%",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "SaraKale",
   "engines": {
     "vscode": "^1.80.0"
@@ -211,6 +211,11 @@
         {
           "command": "noteCollection.deleteItem",
           "when": "view == noteCollection.list && viewItem == file",
+          "group": "2_modification"
+        },
+        {
+          "command": "noteCollection.deleteItem",
+          "when": "view == noteCollection.list && viewItem == file-missing",
           "group": "2_modification"
         },
         {

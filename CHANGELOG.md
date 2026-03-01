@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] - 2026-03-01
+
+If the file does not exist, add a right-click menu option to delete the note item
+
 ## [1.0.2] - 2026-03-01
 
 Modifying ReadMe and translation
