@@ -755,9 +755,26 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
 
     // 导出笔记列表为TXT文本文件
     async exportAsTxt(): Promise<void> {
+        // 生成带日期和时间的文件名
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hour = String(now.getHours()).padStart(2, '0');
+        const minute = String(now.getMinutes()).padStart(2, '0');
+        const second = String(now.getSeconds()).padStart(2, '0');
+        const dateStr = `${year}${month}${day}`;
+        const timeStr = `${hour}${minute}${second}`;
+        
+        // 构建默认文件名
+        const dirPath = path.dirname(this.dataFilePath);
+        const defaultFileName = `NoteList_${dateStr}_${timeStr}.txt`;
+        const defaultUri = vscode.Uri.file(path.join(dirPath, defaultFileName));
+        
         const uri = await vscode.window.showSaveDialog({
+            defaultUri: defaultUri,
             filters: { 'Text Files': ['txt'] },
-            title: Localize.localize('msg.exportTitle') // 导出笔记列表为文本文件
+            title: Localize.localize('msg.exportTitle') // 导出为文本文件
         });
         if (!uri) { return; }
 
@@ -784,35 +801,25 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         });
 
         fs.writeFileSync(uri.fsPath, content);
-        vscode.window.showInformationMessage(Localize.localize('msg.exportSuccess')); // 成功导出
+        vscode.window.showInformationMessage(Localize.localize('msg.exportSuccess')); // 成功导出为文本文件
     }
 
     // 导出JSON备份
     async backupList(sourcePath: string): Promise<void> {
-        // 生成带日期和序号的文件名
+        // 生成带日期和时间的文件名
         const now = new Date();
         const year = now.getFullYear();
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
+        const hour = String(now.getHours()).padStart(2, '0');
+        const minute = String(now.getMinutes()).padStart(2, '0');
+        const second = String(now.getSeconds()).padStart(2, '0');
         const dateStr = `${year}${month}${day}`;
-        
-        // 检查当天已有的备份文件
-        const dirPath = path.dirname(sourcePath);
-        const existingBackups = fs.readdirSync(dirPath)
-            .filter(file => file.startsWith(`NoteList_backup_${dateStr}_`) && file.endsWith('.json'))
-            .map(file => {
-                const match = file.match(/NoteList_backup_\d{8}_(\d{3})\.json/);
-                return match ? parseInt(match[1], 10) : 0;
-            })
-            .filter(num => !isNaN(num));
-        
-        // 生成新的序号
-        // 例子：NoteList_backup_20260101_001.json
-        const nextNum = existingBackups.length > 0 ? Math.max(...existingBackups) + 1 : 1;
-        const seqNum = String(nextNum).padStart(3, '0');
+        const timeStr = `${hour}${minute}${second}`;
         
         // 构建默认文件名
-        const defaultFileName = `NoteList_backup_${dateStr}_${seqNum}.json`;
+        const dirPath = path.dirname(sourcePath);
+        const defaultFileName = `NoteList_backup_${dateStr}_${timeStr}.json`;
         const defaultUri = vscode.Uri.file(path.join(dirPath, defaultFileName));
         
         const uri = await vscode.window.showSaveDialog({
@@ -821,7 +828,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         });
         if (uri) {
             fs.copyFileSync(sourcePath, uri.fsPath);
-            vscode.window.showInformationMessage(Localize.localize('msg.backupSuccess')); // 成功备份
+            vscode.window.showInformationMessage(Localize.localize('msg.backupSuccess')); // 成功导出备份文件
         }
     }
 
@@ -856,7 +863,15 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
 
     // 添加标签
     async addTag(): Promise<void> {
-        const tagName = await vscode.window.showInputBox({ prompt: Localize.localize('msg.enterTagName') }); // 输入标签名
+        const tagName = await vscode.window.showInputBox({ 
+            prompt: Localize.localize('msg.enterTagName'),
+            validateInput: (value: string) => {
+                if (value.includes('/')) {
+                    return Localize.localize('msg.tagNameCannotContainSlash'); // 标签名不能包含斜杠
+                }
+                return null;
+            }
+        });
         if (!tagName) { return; }
 
         const choices = [Localize.localize('msg.createEmptyTag'), Localize.localize('msg.addToFile')]; // 创建空标签、添加到文件
@@ -946,34 +961,46 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
     }
 
-    // 删除标签（支持单个或多个）
+    // 删除标签（支持单个或多个，同时删除子标签）
     async deleteTagWithChildren(tagPath: string | string[]): Promise<void> {
         const tagPaths = Array.isArray(tagPath) ? tagPath : [tagPath];
         if (tagPaths.length === 0) { return; }
         
+        // 找出所有要删除的标签（包括子标签）
+        const allTagsToDelete = new Set<string>();
+        for (const tp of tagPaths) {
+            allTagsToDelete.add(tp);
+            // 查找所有子标签（以 tp/ 开头的标签）
+            this.noteList.forEach(note => {
+                note.tags.forEach(tag => {
+                    if (tag.startsWith(tp + '/')) {
+                        allTagsToDelete.add(tag);
+                    }
+                });
+            });
+        }
+        
         // 计算所有要删除标签下的文件数量
         let totalNotes = 0;
-        for (const tp of tagPaths) {
+        for (const tp of allTagsToDelete) {
             totalNotes += this.noteList.filter(note => note.tags.includes(tp)).length;
         }
         
         const confirmMsg = tagPaths.length === 1
-            ? Localize.localize('msg.confirmDeleteTagWithFiles', tagPaths[0], totalNotes.toString()) // 确认删除标签和文件
-            : Localize.localize('msg.confirmDeleteMultipleTags', tagPaths.length.toString(), totalNotes.toString()); // 确认删除多个标签和文件
+            ? Localize.localize('msg.confirmDeleteTagWithFiles', tagPaths[0], totalNotes.toString())
+            : Localize.localize('msg.confirmDeleteMultipleTags', tagPaths.length.toString(), totalNotes.toString());
         
         const choice = await vscode.window.showWarningMessage(
             confirmMsg,
-            Localize.localize('msg.delete'), // 删除
-            Localize.localize('msg.cancel') // 取消
+            Localize.localize('msg.delete'),
+            Localize.localize('msg.cancel')
         );
         
         if (choice === Localize.localize('msg.delete')) {
-            const tagSet = new Set(tagPaths);
-            
             // 从文件中移除这些标签
             for (const note of this.noteList) {
                 const originalLength = note.tags.length;
-                note.tags = note.tags.filter(tag => !tagSet.has(tag));
+                note.tags = note.tags.filter(tag => !allTagsToDelete.has(tag));
                 // 如果文件没有其他标签了，删除该文件
                 if (note.tags.length === 0 && originalLength > 0) {
                     this.noteList = this.noteList.filter(n => n.rootPath !== note.rootPath);
@@ -981,7 +1008,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             }
             this.saveData();
             this._onDidChangeTreeData.fire();
-            vscode.window.showInformationMessage(Localize.localize('msg.deletedMultipleTags', tagPaths.length.toString(), totalNotes.toString())); // 成功删除多个标签和文件
+            vscode.window.showInformationMessage(Localize.localize('msg.deletedMultipleTags', allTagsToDelete.size.toString(), totalNotes.toString()));
         }
     }
 
@@ -1195,7 +1222,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return addedCount;
     }
 
-    // 导入文件夹内的所有文件到指定标签（递归）
+    // 导入文件夹内的所有文件到指定标签（递归，子文件夹创建同名子标签）
     private async importFolderToTag(folderPath: string, tagPath: string): Promise<number> {
         let addedCount = 0;
         
@@ -1207,8 +1234,10 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                 const stat = fs.statSync(fullPath);
                 
                 if (stat.isDirectory()) {
-                    // 递归导入子文件夹到同一个标签
-                    addedCount += await this.importFolderToTag(fullPath, tagPath);
+                    // 子文件夹创建同名子标签
+                    const subTagName = file;
+                    const subTagPath = `${tagPath}/${subTagName}`;
+                    addedCount += await this.importFolderToTag(fullPath, subTagPath);
                 } else {
                     // 导入文件到指定标签
                     const fileName = path.basename(fullPath);

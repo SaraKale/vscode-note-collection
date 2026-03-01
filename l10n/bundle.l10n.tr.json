@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Seçili {0} öğeyi silmek istediğinizden emin misiniz?",
   "msg.confirmDeleteMultipleTags": "Seçili {0} etiketi ve içindeki {1} dosya öğesini silmek istediğinizden emin misiniz?",
   "msg.deletedMultipleTags": "{0} etiket ve içindeki {1} dosya öğesi silindi",
-  "msg.fileNameMatch": "Dosya adı eşleşmesi"
+  "msg.fileNameMatch": "Dosya adı eşleşmesi",
+  "msg.tagNameCannotContainSlash": "Etiket adı '/' karakterini içeremez"
 }

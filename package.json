@@ -2,7 +2,7 @@
   "name": "note-collection",
   "displayName": "%displayName%",
   "description": "%description%",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "publisher": "SaraKale",
   "engines": {
     "vscode": "^1.80.0"

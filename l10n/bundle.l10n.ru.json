@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Вы уверены, что хотите удалить {0} выбранных элементов?",
   "msg.confirmDeleteMultipleTags": "Вы уверены, что хотите удалить {0} выбранных тегов и их {1} элементов файлов?",
   "msg.deletedMultipleTags": "Удалены {0} тегов и их {1} элементов файлов",
-  "msg.fileNameMatch": "Совпадение имени файла"
+  "msg.fileNameMatch": "Совпадение имени файла",
+  "msg.tagNameCannotContainSlash": "Имя тега не может содержать символ '/'"
 }

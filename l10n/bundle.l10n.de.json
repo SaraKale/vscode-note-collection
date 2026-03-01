@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Möchten Sie die {0} ausgewählten Elemente wirklich löschen?",
   "msg.confirmDeleteMultipleTags": "Möchten Sie wirklich {0} ausgewählte Tags und ihre {1} Dateielemente löschen?",
   "msg.deletedMultipleTags": "{0} Tags und ihre {1} Dateielemente wurden gelöscht",
-  "msg.fileNameMatch": "Dateinamensübereinstimmung"
+  "msg.fileNameMatch": "Dateinamensübereinstimmung",
+  "msg.tagNameCannotContainSlash": "Tagname darf kein '/' Zeichen enthalten"
 }

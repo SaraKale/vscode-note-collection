@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Êtes-vous sûr de vouloir supprimer les {0} éléments sélectionnés ?",
   "msg.confirmDeleteMultipleTags": "Êtes-vous sûr de vouloir supprimer les {0} étiquettes sélectionnées et leurs {1} éléments de fichiers ?",
   "msg.deletedMultipleTags": "Les {0} étiquettes et leurs {1} éléments de fichiers ont été supprimés",
-  "msg.fileNameMatch": "Correspondance du nom de fichier"
+  "msg.fileNameMatch": "Correspondance du nom de fichier",
+  "msg.tagNameCannotContainSlash": "Le nom du tag ne peut pas contenir le caractère '/'"
 }

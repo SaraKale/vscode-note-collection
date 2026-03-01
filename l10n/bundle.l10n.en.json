@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Are you sure you want to delete {0} selected items?",
   "msg.confirmDeleteMultipleTags": "Are you sure you want to delete {0} selected tags and their {1} file items?",
   "msg.deletedMultipleTags": "Deleted {0} tags and their {1} file items",
-  "msg.fileNameMatch": "File Name Match"
+  "msg.fileNameMatch": "File Name Match",
+  "msg.tagNameCannotContainSlash": "Tag names cannot contain the '/' character"
 }

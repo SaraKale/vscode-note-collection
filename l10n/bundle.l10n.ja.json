@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "選択した {0} 個のアイテムを削除してもよろしいですか？",
   "msg.confirmDeleteMultipleTags": "選択した {0} 個のタグとその中に含まれる {1} 個のファイル項目を削除してもよろしいですか？",
   "msg.deletedMultipleTags": "{0} 個のタグとその中に含まれる {1} 個のファイル項目を削除しました",
-  "msg.fileNameMatch": "ファイル名一致"
+  "msg.fileNameMatch": "ファイル名一致",
+  "msg.tagNameCannotContainSlash": "タグ名に '/' 文字を含めることはできません"
 }

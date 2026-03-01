@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "确定要删除选中的 {0} 个项目吗？",
   "msg.confirmDeleteMultipleTags": "确定要删除选中的 {0} 个标签及其包含的 {1} 个文件项目吗？",
   "msg.deletedMultipleTags": "已删除 {0} 个标签及其包含的 {1} 个文件项目",
-  "msg.fileNameMatch": "文件名匹配"
+  "msg.fileNameMatch": "文件名匹配",
+  "msg.tagNameCannotContainSlash": "标签名不能包含 '/' 字符"
 }

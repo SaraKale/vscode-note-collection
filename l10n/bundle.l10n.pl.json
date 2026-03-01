@@ -78,5 +78,6 @@
   "msg.confirmDeleteMultiple": "Czy na pewno chcesz usunąć {0} wybranych elementów?",
   "msg.confirmDeleteMultipleTags": "Czy na pewno chcesz usunąć {0} wybranych tagów i ich {1} elementów plików?",
   "msg.deletedMultipleTags": "Usunięto {0} tagów i ich {1} elementów plików",
-  "msg.fileNameMatch": "Dopasowanie nazwy pliku"
+  "msg.fileNameMatch": "Dopasowanie nazwy pliku",
+  "msg.tagNameCannotContainSlash": "Nazwa tagu nie może zawierać znaku '/'"
 }
