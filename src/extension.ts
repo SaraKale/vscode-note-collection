@@ -5,6 +5,9 @@ import { NoteCollectionProvider } from './NoteCollectionProvider';
 import { NoteItem } from './types';
 import { Localize } from './lang';
 
+// --------------------
+// 插件激活函数
+// --------------------
 export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations！ the“Note Collection” plug-in has been activated!'); // 插件激活时输出日志
 
@@ -44,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
         })
     );
-
+    // 监听 TreeView 的展开事件，同步状态
     context.subscriptions.push(
         treeView.onDidExpandElement(e => {
             const element = e.element;
@@ -64,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
             // 使用 TreeView 的 API 来控制折叠/展开
             const allTags = treeDataProvider.getAllTags();
             if (allTags.length === 0) {
-                vscode.window.showInformationMessage(Localize.localize('msg.noCollapsibleTags'));
+                vscode.window.showInformationMessage(Localize.localize('msg.noCollapsibleTags')); // 没有可折叠的标签
                 return;
             }
             
@@ -79,10 +82,14 @@ export function activate(context: vscode.ExtensionContext) {
                 treeDataProvider.collapseAll();
             }
         }),
+
+        // 刷新列表
         vscode.commands.registerCommand('noteCollection.refresh', () => {
             treeDataProvider.refresh();
             vscode.window.showInformationMessage(Localize.localize('msg.refreshedList')); // 刷新笔记列表
         }),
+
+        // 搜索笔记
         vscode.commands.registerCommand('noteCollection.search', async () => {
             const searchQuery = await vscode.window.showInputBox({
                 placeHolder: Localize.localize('msg.searchPlaceholder'), // 搜索占位符
@@ -188,7 +195,7 @@ export function activate(context: vscode.ExtensionContext) {
                     }
                 }
             }
-
+            // 如果没有找到任何匹配项，显示提示信息
             if (searchResults.length === 0) {
                 vscode.window.showInformationMessage(Localize.localize('msg.noMatchFound')); // 没有匹配的结果
                 return;
@@ -200,7 +207,7 @@ export function activate(context: vscode.ExtensionContext) {
                     // 文件名匹配
                     return {
                         label: result.content,
-                        description: '文件名匹配',
+                        description: Localize.localize('msg.fileNameMatch'), // 文件名匹配
                         detail: result.file,
                         filePath: result.file,
                         line: 0
@@ -222,7 +229,8 @@ export function activate(context: vscode.ExtensionContext) {
                 matchOnDescription: true,
                 matchOnDetail: true
             });
-
+            
+            // 如果用户选择了一个结果，根据是文件名匹配还是内容匹配来打开文件
             if (selected) {
                 if (selected.line === 0) {
                     // 文件名匹配，使用智能文件打开方式
@@ -233,7 +241,7 @@ export function activate(context: vscode.ExtensionContext) {
                         try {
                             await vscode.env.openExternal(vscode.Uri.file(selected.filePath));
                         } catch (externalError) {
-                            vscode.window.showErrorMessage(Localize.localize('msg.cannotOpenFile', selected.filePath));
+                            vscode.window.showErrorMessage(Localize.localize('msg.cannotOpenFile', selected.filePath)); // 无法打开文件
                         }
                     }
                 } else {
@@ -248,7 +256,10 @@ export function activate(context: vscode.ExtensionContext) {
         }),
         vscode.commands.registerCommand('noteCollection.more', () => treeDataProvider.showMoreActions()),
 
+        // --------------------
         // 右键菜单命令
+        // --------------------
+
         // 打开文件
         vscode.commands.registerCommand('noteCollection.openFile', async (node: any) => {
             const noteItem = node.noteItem || node;
@@ -271,6 +282,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             }
         }),
+
         // 在新窗口中打开所在文件夹
         vscode.commands.registerCommand('noteCollection.openInNewWindow', (node: any) => {
             const noteItem = node.noteItem || node;
@@ -278,6 +290,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.commands.executeCommand('vscode.openFolder', vscode.Uri.file(path.dirname(noteItem.rootPath)), true);
             }
         }),
+
         // 在资源管理器中显示
         vscode.commands.registerCommand('noteCollection.revealInExplorer', (node: any) => {
             const noteItem = node.noteItem || node;
@@ -285,6 +298,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.commands.executeCommand('revealFileInOS', vscode.Uri.file(noteItem.rootPath));
             }
         }),
+
         // 删除项目（支持单选和多选）
         vscode.commands.registerCommand('noteCollection.deleteItem', (node: any) => {
             // 从 treeView.selection 获取所有选中项
@@ -304,11 +318,13 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             }
         }),
+
         // 启用/禁用项目
         vscode.commands.registerCommand('noteCollection.disableItem', (node: any) => {
             const noteItem = node.noteItem || node;
             if (noteItem) treeDataProvider.toggleItemEnabled(noteItem);
         }),
+
         // 编辑标签
         vscode.commands.registerCommand('noteCollection.editTags', (node: any) => {
             const noteItem = node.noteItem || node;
@@ -320,13 +336,16 @@ export function activate(context: vscode.ExtensionContext) {
             if (noteItem) treeDataProvider.renameItem(noteItem);
         }),
 
+        // --------------------
         // "更多"菜单中的命令
+        // --------------------
         vscode.commands.registerCommand('noteCollection.exportTxt', () => treeDataProvider.exportAsTxt()), // 导出为TXT
         vscode.commands.registerCommand('noteCollection.backup', () => treeDataProvider.backupList(noteListPath)), // 导出备份文件
         vscode.commands.registerCommand('noteCollection.importBackup', () => treeDataProvider.importBackupList()), // 导入备份文件
         vscode.commands.registerCommand('noteCollection.addTag', () => treeDataProvider.addTag()), // 添加标签
         vscode.commands.registerCommand('noteCollection.deleteTag', () => treeDataProvider.deleteTag()), // 删除标签
         vscode.commands.registerCommand('noteCollection.importFromText', () => treeDataProvider.importFromText()), // 手动输入地址
+
         // 导入文件
         vscode.commands.registerCommand('noteCollection.importFiles', (node: any) => {
             let tagPath = node?.tagPath;
@@ -346,11 +365,13 @@ export function activate(context: vscode.ExtensionContext) {
             }
             if (tagPath) treeDataProvider.importFiles(tagPath);
         }),
+
         // 重命名标签
         vscode.commands.registerCommand('noteCollection.renameTag', (node: any) => {
             const tagPath = node.tagPath;
             if (tagPath) treeDataProvider.renameTag(tagPath);
         }),
+
         // 删除标签（支持单选和多选）
         vscode.commands.registerCommand('noteCollection.deleteTagWithChildren', (node: any) => {
             // 从 treeView.selection 获取所有选中项
@@ -366,6 +387,7 @@ export function activate(context: vscode.ExtensionContext) {
                 treeDataProvider.deleteTagWithChildren(node.tagPath);
             }
         }),
+        
         // 单个标签折叠/展开
         vscode.commands.registerCommand('noteCollection.toggleCollapseTag', (node: any) => {
             const tagPath = node.tagPath;

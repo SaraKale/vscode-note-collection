@@ -35,6 +35,7 @@ class TreeNoteItem extends vscode.TreeItem {
     }
 }
 
+// 核心类：笔记集合提供者，负责管理笔记数据和树视图的交互
 export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteItem>, vscode.TreeDragAndDropController<TreeNoteItem> {
     private _onDidChangeTreeData: vscode.EventEmitter<TreeNoteItem | undefined | null | void> = new vscode.EventEmitter();
     readonly onDidChangeTreeData: vscode.Event<TreeNoteItem | undefined | null | void> = this._onDidChangeTreeData.event;
@@ -65,15 +66,15 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             this.noteList = [];
         }
     }
-
+    // 将数据保存到JSON文件
     private saveData(): void {
         fs.writeFileSync(this.dataFilePath, JSON.stringify(this.noteList, null, 2));
     }
-
+    // 加载和保存标签的折叠状态
     private loadCollapsedState(): void {
         this.collapsedState = new Set(this.globalState.get('noteCollection.collapsedTags', []));
     }
-
+    // 保存折叠状态到全局状态
     private saveCollapsedState(): void {
         this.globalState.update('noteCollection.collapsedTags', Array.from(this.collapsedState));
     }
@@ -101,20 +102,31 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return element;
     }
 
+  
+    /**
+     * 获取树节点的子节点
+     * 实现 vscode.TreeDataProvider 接口的方法
+     * 
+     * @param element - 当前树节点，undefined 表示根节点
+     * @returns - 子节点数组的 Promise
+     */
     getChildren(element?: TreeNoteItem): Thenable<TreeNoteItem[]> {
         if (!element) {
             // 根节点：返回所有标签
+            // 调用 buildTagTree() 方法构建完整的标签树
             return Promise.resolve(this.buildTagTree());
         } else if (element.type === 'tag' && element.tagPath) {
             // 标签节点：返回子标签和笔记文件
             const items: TreeNoteItem[] = [];
             
             // 1. 添加直接子标签（下一级标签）
+            // 获取所有标签
             const allTags = this.getAllTags();
+            // 过滤出直接子标签：路径长度大于1且父路径等于当前标签路径
             const directChildTags = allTags.filter(tag => {
                 const tagPath = this.getTagPath(tag);
                 const parts = tagPath.split('/');
-                if (parts.length <= 1) return false;
+                if (parts.length <= 1) return false; // 顶级标签没有父标签
                 
                 const parentPath = parts.slice(0, -1).join('/');
                 return parentPath === element.tagPath;
@@ -124,38 +136,43 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             directChildTags.forEach(tag => {
                 const tagPath = this.getTagPath(tag);
                 const parts = tag.split('/');
-                const label = parts[parts.length - 1];
+                const label = parts[parts.length - 1]; // 标签名称（取路径的最后一部分）
                 
+                // 根据保存的折叠状态设置子标签的折叠状态
                 const isCollapsed = this.collapsedState.has(tagPath);
                 const collapsibleState = isCollapsed
                     ? vscode.TreeItemCollapsibleState.Collapsed
                     : vscode.TreeItemCollapsibleState.Expanded;
                 
+                // 创建子标签树节点
                 const childTagItem = new TreeNoteItem(
                     label,
                     collapsibleState,
                     'tag',
                     tagPath
                 );
+                // 设置唯一ID，包含版本号以强制刷新
                 childTagItem.id = `tag-${tagPath}-v${this.treeVersion}`;
+                // 设置上下文值，用于右键菜单
                 childTagItem.contextValue = 'tag';
                 items.push(childTagItem);
             });
             
             // 2. 添加该标签下的笔记文件
+            // 过滤出启用状态且包含当前标签的笔记
             const notes = this.noteList.filter(note =>
                 note.enabled && note.tags.some(tag => this.getTagPath(tag) === element.tagPath)
             );
             
             // 构建文件夹树结构
-            const folderMap = new Map<string, TreeNoteItem>();
-            const fileItems: TreeNoteItem[] = [];
+            const folderMap = new Map<string, TreeNoteItem>(); // 存储文件夹节点
+            const fileItems: TreeNoteItem[] = []; // 存储文件节点
             
             notes.forEach(note => {
-                if (!note.rootPath) return;
+                if (!note.rootPath) return; // 跳过没有路径的笔记
                 
-                const dirPath = path.dirname(note.rootPath);
-                const fileName = path.basename(note.rootPath);
+                const dirPath = path.dirname(note.rootPath); // 获取文件所在目录
+                const fileName = path.basename(note.rootPath); // 获取文件名
                 
                 // 检查是否是文件夹（通过判断是否有子文件）
                 const isFolder = fs.existsSync(note.rootPath) && fs.statSync(note.rootPath).isDirectory();
@@ -179,8 +196,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                         if (folderExists) {
                             folderItem.iconPath = new vscode.ThemeIcon('folder');
                         } else {
-                            // 文件夹不存在，显示警告图标
-                            folderItem.iconPath = vscode.Uri.joinPath(vscode.Uri.file(path.join(__dirname, '..')), 'media', 'Warning.svg');
+                            folderItem.iconPath = vscode.Uri.joinPath(vscode.Uri.file(path.join(__dirname, '..')), 'media', 'Warning.svg'); // 文件夹不存在，显示警告图标
                             folderItem.description = Localize.localize('msg.fileMissing'); // 文件夹不存在
                             folderItem.tooltip = Localize.localize('msg.fileMovedOrDeleted', fileName); // 文件夹已被移动或删除
                         }
@@ -195,6 +211,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                         // 这里简化处理，暂时不实现文件夹嵌套
                         fileItems.push(this.createFileTreeItem(note));
                     } else {
+                        // 直接添加文件节点
                         fileItems.push(this.createFileTreeItem(note));
                     }
                 }
@@ -205,12 +222,15 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             return Promise.resolve(items);
         } else if (element.type === 'folder' && element.folderPath) {
             // 文件夹节点：返回文件夹内的文件
+            // 过滤出启用状态且所在目录等于当前文件夹路径的笔记
             const notes = this.noteList.filter(note =>
                 note.enabled && note.rootPath && path.dirname(note.rootPath) === element.folderPath
             );
+            // 为每个笔记创建文件树节点
             const items = notes.map(note => this.createFileTreeItem(note));
             return Promise.resolve(items);
         }
+        // 其他情况返回空数组
         return Promise.resolve([]);
     }
 
@@ -330,7 +350,9 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return note.name || (note.tags && note.tags.length > 0 ? note.tags[0] : Localize.localize('msg.untitled')); // 未命名
     }
 
+    // --------------
     // 实现拖放功能
+    // --------------
     async handleDrag(source: TreeNoteItem[], treeDataTransfer: vscode.DataTransfer, token: vscode.CancellationToken): Promise<void> {
         const draggedItems = source.filter(item => 
             (item.type === 'file' && item.noteItem?.rootPath) || 
@@ -379,7 +401,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                             }
                         } else {
                             // 拖到空白处：使用默认标签或第一个标签
-                            const defaultTag = Localize.localize('msg.defaultTag');
+                            const defaultTag = Localize.localize('msg.defaultTag'); // 默认标签
                             if (!note.tags.includes(defaultTag)) {
                                 note.tags = [defaultTag];
                                 movedCount++;
@@ -403,7 +425,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                         });
                         
                         if (wouldCauseCycle) {
-                            vscode.window.showWarningMessage(Localize.localize('msg.tagAlreadyExists', draggedTagPath));
+                            vscode.window.showWarningMessage(Localize.localize('msg.tagAlreadyExists', draggedTagPath)); // 标签已存在
                             return;
                         }
                     }
@@ -451,12 +473,12 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                     }
                 }
             }
-            
+            // 保存数据并刷新视图
             if (movedCount > 0) {
                 this.saveData();
                 this._onDidChangeTreeData.fire(null);
-                const targetName = targetTag || Localize.localize('msg.defaultTag');
-                vscode.window.showInformationMessage(Localize.localize('msg.movedFilesToTag', movedCount.toString(), targetName));
+                const targetName = targetTag || Localize.localize('msg.defaultTag'); // 目标标签或默认标签
+                vscode.window.showInformationMessage(Localize.localize('msg.movedFilesToTag', movedCount.toString(), targetName)); // 移动文件到标签
             }
             return;
         }
@@ -551,7 +573,10 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
     }
 
+    // --------------------
     // 折叠/展开命令实现
+    // --------------------
+
     // 折叠所有标签
     collapseAll(): void {
         const allTags = this.getAllTags();
@@ -628,18 +653,21 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return this.collapsedState.has(tagPath);
     }
 
+    // --------------------
+    // 删除项目
+    // --------------------
     async deleteItem(node: NoteItem | NoteItem[]): Promise<void> {
         const items = Array.isArray(node) ? node : [node];
         if (items.length === 0) { return; }
         
         const confirmMsg = items.length === 1 
-            ? Localize.localize('msg.confirmDelete', this.getDisplayName(items[0]))
-            : Localize.localize('msg.confirmDeleteMultiple', items.length.toString());
+            ? Localize.localize('msg.confirmDelete', this.getDisplayName(items[0])) // 确认删除
+            : Localize.localize('msg.confirmDeleteMultiple', items.length.toString()); // 确认删除多个
         
         const choice = await vscode.window.showWarningMessage(
             confirmMsg,
-            Localize.localize('msg.delete'),
-            Localize.localize('msg.cancel')
+            Localize.localize('msg.delete'), // 删除
+            Localize.localize('msg.cancel') // 取消
         );
         
         if (choice === Localize.localize('msg.delete')) {
@@ -666,6 +694,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
     }
 
+    // 编辑文件/标签的关联标签
     async editItemTags(node: NoteItem): Promise<void> {
         const allTags = Array.from(new Set(this.noteList.flatMap(n => n.tags)));
         const selected = await vscode.window.showQuickPick(allTags, {
@@ -702,11 +731,13 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
     }
 
+    // --------------------
     // 显示更多操作
+    // --------------------
     async showMoreActions(): Promise<void> {
         const exportTxtTitle = Localize.localize('msg.exportTxt.title'); // 导出为文本文件
-        const backupTitle = Localize.localize('msg.backup.title'); // 导出备份
-        const importBackupTitle = Localize.localize('msg.importBackup.title'); // 导入备份
+        const backupTitle = Localize.localize('msg.backup.title'); // 导出JSON备份文件
+        const importBackupTitle = Localize.localize('msg.importBackup.title'); // 导入JSON备份文件
         const addTagTitle = Localize.localize('msg.addTag.title'); // 添加标签
         const importFromTextTitle = Localize.localize('msg.importFromText.title'); // 手动输入地址
         const selectOperation = Localize.localize('msg.selectOperation'); // 选择操作
@@ -927,13 +958,13 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
         
         const confirmMsg = tagPaths.length === 1
-            ? Localize.localize('msg.confirmDeleteTagWithFiles', tagPaths[0], totalNotes.toString())
-            : Localize.localize('msg.confirmDeleteMultipleTags', tagPaths.length.toString(), totalNotes.toString());
+            ? Localize.localize('msg.confirmDeleteTagWithFiles', tagPaths[0], totalNotes.toString()) // 确认删除标签和文件
+            : Localize.localize('msg.confirmDeleteMultipleTags', tagPaths.length.toString(), totalNotes.toString()); // 确认删除多个标签和文件
         
         const choice = await vscode.window.showWarningMessage(
             confirmMsg,
-            Localize.localize('msg.delete'),
-            Localize.localize('msg.cancel')
+            Localize.localize('msg.delete'), // 删除
+            Localize.localize('msg.cancel') // 取消
         );
         
         if (choice === Localize.localize('msg.delete')) {
@@ -950,7 +981,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             }
             this.saveData();
             this._onDidChangeTreeData.fire();
-            vscode.window.showInformationMessage(Localize.localize('msg.deletedMultipleTags', tagPaths.length.toString(), totalNotes.toString()));
+            vscode.window.showInformationMessage(Localize.localize('msg.deletedMultipleTags', tagPaths.length.toString(), totalNotes.toString())); // 成功删除多个标签和文件
         }
     }
 
@@ -1233,11 +1264,13 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return allTagPaths.length > 0 && allTagPaths.every(tagPath => this.collapsedState.has(tagPath));
     }
 
+    // -------------------
     // 从文本手动导入文件 - 使用 Webview 面板
+    // -------------------
     async importFromText(): Promise<void> {
         const panel = vscode.window.createWebviewPanel(
             'importFromText',
-            Localize.localize('msg.importFromText.title'),
+            Localize.localize('msg.importFromText.title'), // 从文本手动导入文件
             vscode.ViewColumn.One,
             { enableScripts: true }
         );
@@ -1252,6 +1285,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         });
     }
     
+    // HTML 样式
     private getImportWebviewHtml(): string {
         return `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -1345,37 +1379,38 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
 </html>`;
     }
     
+    // 处理从文本手动导入文件的逻辑
     private async processImportFromText(tagsInput: string, pathsInput: string): Promise<void> {
         const tags = tagsInput.split(',').map(t => t.trim()).filter(t => t.length > 0);
         const filePaths = pathsInput.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-        
+        // 如果用户没有输入文件路径，提示并返回
         if (filePaths.length === 0) {
             vscode.window.showWarningMessage(Localize.localize('msg.importFromText.noFiles')); // 提示用户输入有效文件路径
             return;
         }
-        
+        // 如果用户没有输入标签，使用默认标签
         if (tags.length === 0) {
             tags.push(Localize.localize('msg.defaultTag')); // 添加默认标签
         }
         
         let addedCount = 0;
         let skippedCount = 0;
-        
+        // 逐行处理文件路径
         for (const filePath of filePaths) {
             if (!fs.existsSync(filePath)) {
                 skippedCount++;
                 continue;
             }
-            
+            // 如果是目录，递归导入子目录
             const fileName = path.basename(filePath);
             const isDirectory = fs.statSync(filePath).isDirectory();
-            
+            // 如果是文件，直接添加到标签
             for (const tag of tags) {
                 if (isDirectory) {
                     addedCount += await this.importFolderToTag(filePath, tag);
                     continue;
                 }
-                
+                // 检查该标签下是否已存在同名文件
                 const existsInTag = this.noteList.some(note => 
                     note.rootPath === filePath && note.tags.includes(tag)
                 );
@@ -1383,7 +1418,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                     skippedCount++;
                     continue;
                 }
-                
+                // 检查该文件是否已经在其他标签中存在
                 const existingNote = this.noteList.find(note => note.rootPath === filePath);
                 if (existingNote) {
                     if (!existingNote.tags.includes(tag)) {
@@ -1402,12 +1437,12 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                 }
             }
         }
-        
+        // 保存数据并刷新视图
         if (addedCount > 0) {
             this.saveData();
             this._onDidChangeTreeData.fire();
         }
-        
+        // 构建提示信息
         let message = Localize.localize('msg.importedFiles', addedCount.toString()); // 导入成功
         if (skippedCount > 0) {
             message += Localize.localize('msg.skippedFiles', skippedCount.toString()); // 跳过的文件
@@ -1415,4 +1450,5 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         vscode.window.showInformationMessage(message);
     }
 
+    // =========== END ==============
 }

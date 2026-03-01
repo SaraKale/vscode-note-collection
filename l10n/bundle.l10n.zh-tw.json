@@ -77,5 +77,6 @@
   "msg.importFromText.noFiles": "未找到有效檔案路徑",
   "msg.confirmDeleteMultiple": "您確定要刪除選中的 {0} 個項目嗎？",
   "msg.confirmDeleteMultipleTags": "您確定要刪除選中的 {0} 個標籤及其包含的 {1} 個文件項目嗎？",
-  "msg.deletedMultipleTags": "已刪除 {0} 個標籤及其包含的 {1} 個文件項目"
+  "msg.deletedMultipleTags": "已刪除 {0} 個標籤及其包含的 {1} 個文件項目",
+  "msg.fileNameMatch": "檔名匹配"
 }

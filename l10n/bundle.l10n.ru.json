@@ -77,5 +77,6 @@
   "msg.importFromText.noFiles": "Не найдено допустимых путей к файлам",
   "msg.confirmDeleteMultiple": "Вы уверены, что хотите удалить {0} выбранных элементов?",
   "msg.confirmDeleteMultipleTags": "Вы уверены, что хотите удалить {0} выбранных тегов и их {1} элементов файлов?",
-  "msg.deletedMultipleTags": "Удалены {0} тегов и их {1} элементов файлов"
+  "msg.deletedMultipleTags": "Удалены {0} тегов и их {1} элементов файлов",
+  "msg.fileNameMatch": "Совпадение имени файла"
 }

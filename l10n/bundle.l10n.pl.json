@@ -77,5 +77,6 @@
   "msg.importFromText.noFiles": "Nie znaleziono prawidłowych ścieżek plików",
   "msg.confirmDeleteMultiple": "Czy na pewno chcesz usunąć {0} wybranych elementów?",
   "msg.confirmDeleteMultipleTags": "Czy na pewno chcesz usunąć {0} wybranych tagów i ich {1} elementów plików?",
-  "msg.deletedMultipleTags": "Usunięto {0} tagów i ich {1} elementów plików"
+  "msg.deletedMultipleTags": "Usunięto {0} tagów i ich {1} elementów plików",
+  "msg.fileNameMatch": "Dopasowanie nazwy pliku"
 }

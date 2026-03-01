@@ -77,5 +77,6 @@
   "msg.importFromText.noFiles": "Nebyly nalezeny žádné platné cesty k souborům",
   "msg.confirmDeleteMultiple": "Opravdu chcete smazat {0} vybraných prvků?",
   "msg.confirmDeleteMultipleTags": "Opravdu chcete smazat {0} vybraných štítků a jejich {1} prvků souborů?",
-  "msg.deletedMultipleTags": "Smazáno {0} štítků a jejich {1} prvků souborů"
+  "msg.deletedMultipleTags": "Smazáno {0} štítků a jejich {1} prvků souborů",
+  "msg.fileNameMatch": "Shoda názvu souboru"
 }

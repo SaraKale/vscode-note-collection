@@ -77,5 +77,6 @@
   "msg.importFromText.noFiles": "Nessun percorso file valido trovato",
   "msg.confirmDeleteMultiple": "Sei sicuro di voler eliminare gli {0} elementi selezionati?",
   "msg.confirmDeleteMultipleTags": "Sei sicuro di voler eliminare {0} etichette selezionate e i loro {1} elementi di file?",
-  "msg.deletedMultipleTags": "Eliminate {0} etichette e i loro {1} elementi di file"
+  "msg.deletedMultipleTags": "Eliminate {0} etichette e i loro {1} elementi di file",
+  "msg.fileNameMatch": "Corrispondenza del nome del file"
 }
