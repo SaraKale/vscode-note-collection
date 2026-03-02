@@ -861,15 +861,47 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         }
     }
 
+    // 标签名称验证和清理方法
+    private sanitizeTagName(tagName: string): string {
+        // 移除或替换非法字符
+        return tagName
+            .replace(/[<>:"/\\|?*]/g, '') // 移除Windows文件系统非法字符
+            .replace(/^\s+|\s+$/g, '') // 移除首尾空格
+            .replace(/\s+/g, ' ') // 将多个空格合并为一个
+            .substring(0, 50); // 限制最大长度
+    }
+
+    // 标签名称验证方法
+    private validateTagName(tagName: string): string | null {
+        if (!tagName || tagName.trim().length === 0) {
+            return Localize.localize('msg.tagNameCannotBeEmpty'); // 标签名不能为空
+        }
+        
+        if (tagName.length > 50) {
+            return Localize.localize('msg.tagNameTooLong'); // 标签名过长
+        }
+        
+        // 检查非法字符
+        const invalidChars = /[<>:"/\\|?*]/;
+        if (invalidChars.test(tagName)) {
+            return Localize.localize('msg.tagNameContainsInvalidChars'); // 标签名包含非法字符
+        }
+        
+        // 检查保留名称
+        const reservedNames = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
+        if (reservedNames.includes(tagName.toUpperCase())) {
+            return Localize.localize('msg.tagNameIsReserved'); // 标签名是系统保留名称
+        }
+        
+        return null;
+    }
+
     // 添加标签
     async addTag(): Promise<void> {
         const tagName = await vscode.window.showInputBox({ 
             prompt: Localize.localize('msg.enterTagName'),
             validateInput: (value: string) => {
-                if (value.includes('/')) {
-                    return Localize.localize('msg.tagNameCannotContainSlash'); // 标签名不能包含斜杠
-                }
-                return null;
+                return this.validateTagName(value);
             }
         });
         if (!tagName) { return; }
@@ -1022,11 +1054,28 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         const oldTagName = tagPath.split('/').pop() || '';
         const newTagName = await vscode.window.showInputBox({
             prompt: Localize.localize('msg.renameTagPrompt'), // 重命名标签
-            value: oldTagName
+            value: oldTagName,
+            validateInput: (value: string) => {
+                return this.validateTagName(value);
+            }
         });
 
         if (!newTagName || newTagName === oldTagName) {
             return;
+        }
+        
+        // 清理标签名称
+        const sanitizedTagName = this.sanitizeTagName(newTagName);
+        if (sanitizedTagName !== newTagName) {
+            const useSanitized = await vscode.window.showWarningMessage(
+                Localize.localize('msg.tagNameSanitized', newTagName, sanitizedTagName), // 标签名 \"{0}\" 包含非法字符，已自动清理为 \"{1}\"，是否使用清理后的名称？
+                Localize.localize('msg.useSanitized'), // 使用清理后的名称
+                Localize.localize('msg.cancel') // 取消
+            );
+            
+            if (useSanitized !== Localize.localize('msg.useSanitized')) {
+                return;
+            }
         }
 
         // 重命名所有包含该标签的笔记
@@ -1225,52 +1274,95 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
     // 导入文件夹内的所有文件到指定标签（递归，子文件夹创建同名子标签）
     private async importFolderToTag(folderPath: string, tagPath: string): Promise<number> {
         let addedCount = 0;
+        let hasFiles = false; // 标记当前文件夹是否有文件
         
         try {
+            // 检查文件夹是否存在且可访问
+            if (!fs.existsSync(folderPath)) {
+                console.warn(`Folder does not exist: ${folderPath}`);
+                return 0;
+            }
+            
             const files = fs.readdirSync(folderPath);
             
             for (const file of files) {
                 const fullPath = path.join(folderPath, file);
-                const stat = fs.statSync(fullPath);
                 
-                if (stat.isDirectory()) {
-                    // 子文件夹创建同名子标签
-                    const subTagName = file;
-                    const subTagPath = `${tagPath}/${subTagName}`;
-                    addedCount += await this.importFolderToTag(fullPath, subTagPath);
-                } else {
-                    // 导入文件到指定标签
-                    const fileName = path.basename(fullPath);
+                try {
+                    const stat = fs.statSync(fullPath);
                     
-                    // 检查该标签下是否已存在同名文件
-                    const existsInTag = this.noteList.some(note => 
-                        note.rootPath === fullPath && note.tags.includes(tagPath)
-                    );
-                    if (existsInTag) {
+                    // 跳过系统文件和隐藏文件
+                    if (file.startsWith('.') || file === 'Thumbs.db' || file === 'desktop.ini') {
                         continue;
                     }
                     
-                    // 检查该文件是否已经在其他标签中存在
-                    const existingNote = this.noteList.find(note => note.rootPath === fullPath);
-                    if (existingNote) {
-                        // 如果文件已存在，只需添加到当前标签
-                        if (!existingNote.tags.includes(tagPath)) {
-                            existingNote.tags.push(tagPath);
-                            addedCount++;
+                    if (stat.isDirectory()) {
+                        // 子文件夹创建同名子标签（支持无限层级递归）
+                        const subTagName = this.sanitizeTagName(file);
+                        const subTagPath = `${tagPath}/${subTagName}`;
+                        
+                        // 递归导入子文件夹
+                        const subAddedCount = await this.importFolderToTag(fullPath, subTagPath);
+                        addedCount += subAddedCount;
+                        
+                        // 如果子文件夹有文件，标记当前文件夹也有内容
+                        if (subAddedCount > 0) {
+                            hasFiles = true;
                         }
                     } else {
-                        // 如果文件不存在，创建新笔记
-                        const newNote: NoteItem = {
-                            name: fileName,
-                            rootPath: fullPath,
-                            paths: [],
-                            tags: [tagPath],
-                            enabled: true
-                        };
-                        this.noteList.push(newNote);
-                        addedCount++;
+                        // 支持所有文件类型
+                        // 导入文件到指定标签
+                        const fileName = path.basename(fullPath);
+                        hasFiles = true; // 标记有文件
+                        
+                        // 检查该标签下是否已存在同名文件
+                        const existsInTag = this.noteList.some(note => 
+                            note.rootPath === fullPath && note.tags.includes(tagPath)
+                        );
+                        if (existsInTag) {
+                            continue;
+                        }
+                        
+                        // 检查该文件是否已经在其他标签中存在
+                        const existingNote = this.noteList.find(note => note.rootPath === fullPath);
+                        if (existingNote) {
+                            // 如果文件已存在，只需添加到当前标签
+                            if (!existingNote.tags.includes(tagPath)) {
+                                existingNote.tags.push(tagPath);
+                                addedCount++;
+                            }
+                        } else {
+                            // 如果文件不存在，创建新笔记
+                            const newNote: NoteItem = {
+                                name: fileName,
+                                rootPath: fullPath,
+                                paths: [],
+                                tags: [tagPath],
+                                enabled: true
+                            };
+                            this.noteList.push(newNote);
+                            addedCount++;
+                        }
                     }
+                } catch (fileError) {
+                    console.warn(`Error processing file ${fullPath}:`, fileError);
+                    // 继续处理其他文件，不中断整个导入过程
                 }
+            }
+            
+            // 确保每个文件夹都有对应的标签（即使没有文件也要创建标签以保持层级结构）
+            // 检查该标签是否已存在
+            const tagExists = this.noteList.some(note => note.tags.includes(tagPath));
+            if (!tagExists) {
+                // 创建空标签项目
+                const emptyNote: NoteItem = {
+                    name: Localize.localize('msg.emptyFolder'), // 空文件夹
+                    rootPath: '',
+                    paths: [],
+                    tags: [tagPath],
+                    enabled: true
+                };
+                this.noteList.push(emptyNote);
             }
         } catch (error) {
             console.error(`Error importing folder ${folderPath} to tag ${tagPath}:`, error);

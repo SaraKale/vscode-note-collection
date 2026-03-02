@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "選択した {0} 個のタグとその中に含まれる {1} 個のファイル項目を削除してもよろしいですか？",
   "msg.deletedMultipleTags": "{0} 個のタグとその中に含まれる {1} 個のファイル項目を削除しました",
   "msg.fileNameMatch": "ファイル名一致",
-  "msg.tagNameCannotContainSlash": "タグ名に '/' 文字を含めることはできません"
+  "msg.tagNameCannotContainSlash": "タグ名に '/' 文字を含めることはできません",
+  "msg.tagNameCannotBeEmpty": "タグ名を空にすることはできません",
+  "msg.tagNameTooLong": "タグ名が長すぎます、最大50文字です",
+  "msg.tagNameContainsInvalidChars": "タグ名に無効な文字が含まれています（< > : \" / \\ | ? * などの文字を含めることはできません）",
+  "msg.tagNameIsReserved": "タグ名はシステム予約名です。別の名前を使用してください",
+  "msg.tagNameSanitized": "タグ名 \"{0}\" に無効な文字が含まれており、自動的に \"{1}\" にサニタイズされました。サニタイズされた名前を使用しますか？",
+  "msg.useSanitized": "サニタイズされた名前を使用する",
+  "msg.emptyFolder": "(空のフォルダ)"
 }

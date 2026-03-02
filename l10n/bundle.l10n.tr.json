@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "Seçili {0} etiketi ve içindeki {1} dosya öğesini silmek istediğinizden emin misiniz?",
   "msg.deletedMultipleTags": "{0} etiket ve içindeki {1} dosya öğesi silindi",
   "msg.fileNameMatch": "Dosya adı eşleşmesi",
-  "msg.tagNameCannotContainSlash": "Etiket adı '/' karakterini içeremez"
+  "msg.tagNameCannotContainSlash": "Etiket adı '/' karakterini içeremez",
+  "msg.tagNameCannotBeEmpty": "Etiket adı boş olamaz",
+  "msg.tagNameTooLong": "Etiket adı çok uzun, en fazla 50 karakter",
+  "msg.tagNameContainsInvalidChars": "Etiket adı geçersiz karakterler içeriyor (< > : \" / \\ | ? * gibi karakterler içeremez)",
+  "msg.tagNameIsReserved": "Etiket adı sistem tarafından ayrılmış bir addır, lütfen farklı bir ad kullanın",
+  "msg.tagNameSanitized": "Etiket adı \"{0}\" geçersiz karakterler içeriyor ve otomatik olarak \"{1}\" olarak temizlendi. Temizlenmiş adı kullanmak ister misiniz?",
+  "msg.useSanitized": "Temizlenmiş adı kullan",
+  "msg.emptyFolder": "(Boş klasör)"
 }

@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "Czy na pewno chcesz usunąć {0} wybranych tagów i ich {1} elementów plików?",
   "msg.deletedMultipleTags": "Usunięto {0} tagów i ich {1} elementów plików",
   "msg.fileNameMatch": "Dopasowanie nazwy pliku",
-  "msg.tagNameCannotContainSlash": "Nazwa tagu nie może zawierać znaku '/'"
+  "msg.tagNameCannotContainSlash": "Nazwa tagu nie może zawierać znaku '/'",
+  "msg.tagNameCannotBeEmpty": "Nazwa tagu nie może być pusta",
+  "msg.tagNameTooLong": "Nazwa tagu jest zbyt długa, maksymalnie 50 znaków",
+  "msg.tagNameContainsInvalidChars": "Nazwa tagu zawiera nieprawidłowe znaki (nie może zawierać znaków takich jak < > : \" / \\ | ? * i inne)",
+  "msg.tagNameIsReserved": "Nazwa tagu jest zarezerwowaną nazwą systemową, proszę użyć innej nazwy",
+  "msg.tagNameSanitized": "Nazwa tagu \"{0}\" zawiera nieprawidłowe znaki i została automatycznie oczyszczona na \"{1}\". Czy chcesz użyć oczyszczonej nazwy?",
+  "msg.useSanitized": "Użyj oczyszczonej nazwy",
+  "msg.emptyFolder": "(Pusty folder)"
 }

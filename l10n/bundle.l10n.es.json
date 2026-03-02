@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "¿Está seguro de que desea eliminar las {0} etiquetas seleccionadas y sus {1} elementos de archivos?",
   "msg.deletedMultipleTags": "Se han eliminado las {0} etiquetas y sus {1} elementos de archivos",
   "msg.fileNameMatch": "Coincidencia del nombre de archivo",
-  "msg.tagNameCannotContainSlash": "El nombre de la etiqueta no puede contener el carácter '/'"
+  "msg.tagNameCannotContainSlash": "El nombre de la etiqueta no puede contener el carácter '/'",
+  "msg.tagNameCannotBeEmpty": "El nombre de la etiqueta no puede estar vacío",
+  "msg.tagNameTooLong": "El nombre de la etiqueta es demasiado largo, máximo 50 caracteres",
+  "msg.tagNameContainsInvalidChars": "El nombre de la etiqueta contiene caracteres inválidos (no puede contener < > : \" / \\ | ? * y otros caracteres)",
+  "msg.tagNameIsReserved": "El nombre de la etiqueta es un nombre reservado del sistema, por favor use un nombre diferente",
+  "msg.tagNameSanitized": "El nombre de la etiqueta \"{0}\" contiene caracteres inválidos y ha sido limpiado automáticamente a \"{1}\". ¿Desea usar el nombre limpio?",
+  "msg.useSanitized": "Usar nombre limpio",
+  "msg.emptyFolder": "(Carpeta vacía)"
 }

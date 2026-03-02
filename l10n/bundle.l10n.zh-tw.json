@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "您確定要刪除選中的 {0} 個標籤及其包含的 {1} 個文件項目嗎？",
   "msg.deletedMultipleTags": "已刪除 {0} 個標籤及其包含的 {1} 個文件項目",
   "msg.fileNameMatch": "檔名匹配",
-  "msg.tagNameCannotContainSlash": "標籤名稱不能包含 '/' 字符"
+  "msg.tagNameCannotContainSlash": "標籤名稱不能包含 '/' 字符",
+  "msg.tagNameCannotBeEmpty": "標籤名稱不能為空",
+  "msg.tagNameTooLong": "標籤名稱過長，最多50個字元",
+  "msg.tagNameContainsInvalidChars": "標籤名稱包含非法字元（不能包含 < > : \" / \\ | ? * 等字元）",
+  "msg.tagNameIsReserved": "標籤名稱是系統保留名稱，請使用其他名稱",
+  "msg.tagNameSanitized": "標籤名稱 \"{0}\" 包含非法字元，已自動清理為 \"{1}\"，是否使用清理後的名稱？",
+  "msg.useSanitized": "使用清理後的名稱",
+  "msg.emptyFolder": "(空資料夾)"
 }

@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "Möchten Sie wirklich {0} ausgewählte Tags und ihre {1} Dateielemente löschen?",
   "msg.deletedMultipleTags": "{0} Tags und ihre {1} Dateielemente wurden gelöscht",
   "msg.fileNameMatch": "Dateinamensübereinstimmung",
-  "msg.tagNameCannotContainSlash": "Tagname darf kein '/' Zeichen enthalten"
+  "msg.tagNameCannotContainSlash": "Tagname darf kein '/' Zeichen enthalten",
+  "msg.tagNameCannotBeEmpty": "Tagname darf nicht leer sein",
+  "msg.tagNameTooLong": "Tagname ist zu lang, maximal 50 Zeichen",
+  "msg.tagNameContainsInvalidChars": "Tagname enthält ungültige Zeichen (darf keine < > : \" / \\ | ? * und andere Zeichen enthalten)",
+  "msg.tagNameIsReserved": "Tagname ist ein systemreservierter Name, bitte verwenden Sie einen anderen Namen",
+  "msg.tagNameSanitized": "Tagname \"{0}\" enthält ungültige Zeichen und wurde automatisch zu \"{1}\" bereinigt. Möchten Sie den bereinigten Namen verwenden?",
+  "msg.useSanitized": "Bereinigten Namen verwenden",
+  "msg.emptyFolder": "(Leerer Ordner)"
 }

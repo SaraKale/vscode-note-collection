@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "Tem certeza de que deseja excluir as {0} tags selecionadas e seus {1} itens de arquivo?",
   "msg.deletedMultipleTags": "Excluídas as {0} tags e seus {1} itens de arquivo",
   "msg.fileNameMatch": "Correspondência do nome do arquivo",
-  "msg.tagNameCannotContainSlash": "O nome da tag não pode conter o caractere '/'"
+  "msg.tagNameCannotContainSlash": "O nome da tag não pode conter o caractere '/'",
+  "msg.tagNameCannotBeEmpty": "O nome da tag não pode estar vazio",
+  "msg.tagNameTooLong": "O nome da tag é muito longo, máximo 50 caracteres",
+  "msg.tagNameContainsInvalidChars": "O nome da tag contém caracteres inválidos (não pode conter < > : \" / \\ | ? * e outros caracteres)",
+  "msg.tagNameIsReserved": "O nome da tag é um nome reservado do sistema, por favor use um nome diferente",
+  "msg.tagNameSanitized": "O nome da tag \"{0}\" contém caracteres inválidos e foi automaticamente limpo para \"{1}\". Deseja usar o nome limpo?",
+  "msg.useSanitized": "Usar nome limpo",
+  "msg.emptyFolder": "(Pasta vazia)"
 }

@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "Opravdu chcete smazat {0} vybraných štítků a jejich {1} prvků souborů?",
   "msg.deletedMultipleTags": "Smazáno {0} štítků a jejich {1} prvků souborů",
   "msg.fileNameMatch": "Shoda názvu souboru",
-  "msg.tagNameCannotContainSlash": "Název štítku nemůže obsahovat znak '/'"
+  "msg.tagNameCannotContainSlash": "Název štítku nemůže obsahovat znak '/'",
+  "msg.tagNameCannotBeEmpty": "Název štítku nemůže být prázdný",
+  "msg.tagNameTooLong": "Název štítku je příliš dlouhý, maximálně 50 znaků",
+  "msg.tagNameContainsInvalidChars": "Název štítku obsahuje neplatné znaky (nemůže obsahovat < > : \" / \\ | ? * a další znaky)",
+  "msg.tagNameIsReserved": "Název štítku je rezervovaný název systému, prosím použijte jiný název",
+  "msg.tagNameSanitized": "Název štítku \"{0}\" obsahuje neplatné znaky a byl automaticky vyčištěn na \"{1}\". Chcete použít vyčištěný název?",
+  "msg.useSanitized": "Použít vyčištěný název",
+  "msg.emptyFolder": "(Prázdná složka)"
 }

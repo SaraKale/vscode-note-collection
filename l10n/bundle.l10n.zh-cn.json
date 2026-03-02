@@ -79,5 +79,12 @@
   "msg.confirmDeleteMultipleTags": "确定要删除选中的 {0} 个标签及其包含的 {1} 个文件项目吗？",
   "msg.deletedMultipleTags": "已删除 {0} 个标签及其包含的 {1} 个文件项目",
   "msg.fileNameMatch": "文件名匹配",
-  "msg.tagNameCannotContainSlash": "标签名不能包含 '/' 字符"
+  "msg.tagNameCannotContainSlash": "标签名不能包含 '/' 字符",
+  "msg.tagNameCannotBeEmpty": "标签名不能为空",
+  "msg.tagNameTooLong": "标签名过长，最多50个字符",
+  "msg.tagNameContainsInvalidChars": "标签名包含非法字符（不能包含 < > : \" / \\ | ? * 等字符）",
+  "msg.tagNameIsReserved": "标签名是系统保留名称，请使用其他名称",
+  "msg.tagNameSanitized": "标签名 \"{0}\" 包含非法字符，已自动清理为 \"{1}\"，是否使用清理后的名称？",
+  "msg.useSanitized": "使用清理后的名称",
+  "msg.emptyFolder": "(空文件夹)"
 }

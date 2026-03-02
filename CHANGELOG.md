@@ -1,10 +1,14 @@
 # Changelog
 
+## [1.0.5] - 2026-03-02
+
+Modify folder logic
+
 ## [1.0.4] - 2026-03-01
 
-Automatically create sub-labels with the same name for sub-folders when importing/dragging folders
-When adding tags, it is prohibited to enter the / character
-Modify the date and time logic for exporting JSON backup files and TXT files
+- Automatically create sub-labels with the same name for sub-folders when importing/dragging folders
+- When adding tags, it is prohibited to enter the / character
+- Modify the date and time logic for exporting JSON backup files and TXT files
 
 ## [1.0.3] - 2026-03-01
 
