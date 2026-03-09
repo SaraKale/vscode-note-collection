@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Elimina etichetta",
   "noteCollection.toggleCollapseTag.title": "Espandi/comprimi etichetta",
   "noteCollection.importFromText.title": "Importa da testo...",
-  "noteCollection.deleteItems.title": "Elimina note selezionate"
+  "noteCollection.deleteItems.title": "Elimina note selezionate",
+  "noteCollection.refreshFolder.title": "Aggiorna cartella",
+  "configuration.title": "Raccolta note",
+  "noteCollection.autoRefreshFolders.description": "Aggiorna automaticamente il contenuto della cartella quando i file vengono aggiunti o rimossi"
 }

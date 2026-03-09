@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "標籤名稱是系統保留名稱，請使用其他名稱",
   "msg.tagNameSanitized": "標籤名稱 \"{0}\" 包含非法字元，已自動清理為 \"{1}\"，是否使用清理後的名稱？",
   "msg.useSanitized": "使用清理後的名稱",
-  "msg.emptyFolder": "(空資料夾)"
+  "msg.emptyFolder": "(空資料夾)",
+  "msg.folderRefreshed Both": "資料夾 \"{0}\" 已重新整理：新增 {1} 個文件，移除 {2} 個文件",
+  "msg.folderRefreshedAdded": "資料夾 \"{0}\" 已重新整理：新增 {1} 個文件",
+  "msg.folderRefreshedRemoved": "資料夾 \"{0}\" 已重新整理：移除 {2} 個文件",
+  "msg.folderRefreshed": "資料夾 \"{0}\" 已重新整理：{1}",
+  "msg.addedFilesSimple": "新增 {0} 個文件",
+  "msg.removedFilesSimple": "移除 {0} 個文件",
+  "msg.newFoldersSimple": "發現 {0} 個新子資料夾",
+  "msg.movedFilesSimple": "更新 {0} 個移動的文件",
+  "msg.folderRemoved": "資料夾 \"{0}\" 已移除：清理了 {1} 個文件和 {2} 個子資料夾",
+  "msg.refreshAllComplete": "重新整理完成：移除了 {0} 個不存在的文件，清理了 {1} 個不存在的資料夾",
+  "msg.refreshAllNoChange": "所有資料夾已是最新狀態"
 }

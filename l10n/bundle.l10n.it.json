@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Il nome dell'etichetta è un nome riservato del sistema, per favore usa un nome diverso",
   "msg.tagNameSanitized": "Il nome dell'etichetta \"{0}\" contiene caratteri non validi ed è stato automaticamente ripulito in \"{1}\". Vuoi usare il nome ripulito?",
   "msg.useSanitized": "Usa nome ripulito",
-  "msg.emptyFolder": "(Cartella vuota)"
+  "msg.emptyFolder": "(Cartella vuota)",
+  "msg.folderRefreshed Both": "Cartella \"{0}\" aggiornata: {1} file aggiunti, {2} file rimossi",
+  "msg.folderRefreshedAdded": "Cartella \"{0}\" aggiornata: {1} file aggiunti",
+  "msg.folderRefreshedRemoved": "Cartella \"{0}\" aggiornata: {2} file rimossi",
+  "msg.folderRefreshed": "Cartella \"{0}\" aggiornata: {1}",
+  "msg.addedFilesSimple": "{0} file aggiunti",
+  "msg.removedFilesSimple": "{0} file rimossi",
+  "msg.newFoldersSimple": "{0} nuove sottocartelle trovate",
+  "msg.movedFilesSimple": "Aggiornati {0} file spostati",
+  "msg.folderRemoved": "Cartella \"{0}\" rimossa: puliti {1} file e {2} sottocartelle",
+  "msg.refreshAllComplete": "Aggiornamento completo: rimossi {0} file inesistenti, pulite {1} cartelle inesistenti",
+  "msg.refreshAllNoChange": "Tutte le cartelle sono aggiornate"
 }

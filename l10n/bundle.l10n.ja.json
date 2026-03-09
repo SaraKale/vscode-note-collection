@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "タグ名はシステム予約名です。別の名前を使用してください",
   "msg.tagNameSanitized": "タグ名 \"{0}\" に無効な文字が含まれており、自動的に \"{1}\" にサニタイズされました。サニタイズされた名前を使用しますか？",
   "msg.useSanitized": "サニタイズされた名前を使用する",
-  "msg.emptyFolder": "(空のフォルダ)"
+  "msg.emptyFolder": "(空のフォルダ)",
+  "msg.folderRefreshed Both": "フォルダ \"{0}\" を更新しました：{1}個のファイルを追加、{2}個のファイルを削除",
+  "msg.folderRefreshedAdded": "フォルダ \"{0}\" を更新しました：{1}個のファイルを追加",
+  "msg.folderRefreshedRemoved": "フォルダ \"{0}\" を更新しました：{2}個のファイルを削除",
+  "msg.folderRefreshed": "フォルダ \"{0}\" を更新しました：{1}",
+  "msg.addedFilesSimple": "{0}個のファイルを追加",
+  "msg.removedFilesSimple": "{0}個のファイルを削除",
+  "msg.newFoldersSimple": "{0}個の新しいサブフォルダが見つかりました",
+  "msg.movedFilesSimple": "{0}個の移動されたファイルを更新",
+  "msg.folderRemoved": "フォルダ \"{0}\" が削除されました：{1}個のファイルと{2}個のサブフォルダをクリアしました",
+  "msg.refreshAllComplete": "更新完了：{0}個の存在しないファイルを削除し、{1}個の存在しないフォルダをクリアしました",
+  "msg.refreshAllNoChange": "すべてのフォルダが最新の状態です"
 }

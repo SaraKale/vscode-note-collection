@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "O nome da tag é um nome reservado do sistema, por favor use um nome diferente",
   "msg.tagNameSanitized": "O nome da tag \"{0}\" contém caracteres inválidos e foi automaticamente limpo para \"{1}\". Deseja usar o nome limpo?",
   "msg.useSanitized": "Usar nome limpo",
-  "msg.emptyFolder": "(Pasta vazia)"
+  "msg.emptyFolder": "(Pasta vazia)",
+  "msg.folderRefreshed Both": "Pasta \"{0}\" atualizada: {1} arquivos adicionados, {2} arquivos removidos",
+  "msg.folderRefreshedAdded": "Pasta \"{0}\" atualizada: {1} arquivos adicionados",
+  "msg.folderRefreshedRemoved": "Pasta \"{0}\" atualizada: {2} arquivos removidos",
+  "msg.folderRefreshed": "Pasta \"{0}\" atualizada: {1}",
+  "msg.addedFilesSimple": "{0} arquivos adicionados",
+  "msg.removedFilesSimple": "{0} arquivos removidos",
+  "msg.newFoldersSimple": "{0} novas subpastas encontradas",
+  "msg.movedFilesSimple": "{0} arquivos movidos atualizados",
+  "msg.folderRemoved": "Pasta \"{0}\" removida: limpos {1} arquivos e {2} subpastas",
+  "msg.refreshAllComplete": "Atualização concluída: removidos {0} arquivos inexistentes, limpas {1} pastas inexistentes",
+  "msg.refreshAllNoChange": "Todas as pastas estão atualizadas"
 }

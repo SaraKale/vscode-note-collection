@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Usuń tag",
   "noteCollection.toggleCollapseTag.title": "Rozwiń/zwiń tag",
   "noteCollection.importFromText.title": "Importuj z tekstu...",
-  "noteCollection.deleteItems.title": "Usuń wybrane notatki"
+  "noteCollection.deleteItems.title": "Usuń wybrane notatki",
+  "noteCollection.refreshFolder.title": "Odśwież folder",
+  "configuration.title": "Kolekcja notatek",
+  "noteCollection.autoRefreshFolders.description": "Automatycznie odświeżaj zawartość folderu po dodaniu lub usunięciu plików"
 }

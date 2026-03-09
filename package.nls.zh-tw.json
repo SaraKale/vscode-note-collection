@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "刪除標籤",
   "noteCollection.toggleCollapseTag.title": "展開/折疊標籤",
   "noteCollection.importFromText.title": "從文字匯入...",
-  "noteCollection.deleteItems.title": "刪除選中的筆記"
+  "noteCollection.deleteItems.title": "刪除選中的筆記",
+  "noteCollection.refreshFolder.title": "重新整理資料夾",
+  "configuration.title": "筆記收藏集",
+  "noteCollection.autoRefreshFolders.description": "當資料夾中新增或刪除檔案時自動重新整理資料夾內容"
 }

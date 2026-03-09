@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Etiket adı sistem tarafından ayrılmış bir addır, lütfen farklı bir ad kullanın",
   "msg.tagNameSanitized": "Etiket adı \"{0}\" geçersiz karakterler içeriyor ve otomatik olarak \"{1}\" olarak temizlendi. Temizlenmiş adı kullanmak ister misiniz?",
   "msg.useSanitized": "Temizlenmiş adı kullan",
-  "msg.emptyFolder": "(Boş klasör)"
+  "msg.emptyFolder": "(Boş klasör)",
+  "msg.folderRefreshed Both": "Klasör \"{0}\" yenilendi: {1} dosya eklendi, {2} dosya kaldırıldı",
+  "msg.folderRefreshedAdded": "Klasör \"{0}\" yenilendi: {1} dosya eklendi",
+  "msg.folderRefreshedRemoved": "Klasör \"{0}\" yenilendi: {2} dosya kaldırıldı",
+  "msg.folderRefreshed": "Klasör \"{0}\" yenilendi: {1}",
+  "msg.addedFilesSimple": "{0} dosya eklendi",
+  "msg.removedFilesSimple": "{0} dosya kaldırıldı",
+  "msg.newFoldersSimple": "{0} yeni alt klasör bulundu",
+  "msg.movedFilesSimple": "{0} taşınan dosya güncellendi",
+  "msg.folderRemoved": "Klasör \"{0}\" kaldırıldı: {1} dosya ve {2} alt klasör temizlendi",
+  "msg.refreshAllComplete": "Yenileme tamamlandı: {0} var olmayan dosya kaldırıldı, {1} var olmayan klasör temizlendi",
+  "msg.refreshAllNoChange": "Tüm klasörler güncel"
 }

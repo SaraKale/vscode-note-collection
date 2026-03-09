@@ -2,7 +2,7 @@
   "name": "note-collection",
   "displayName": "%displayName%",
   "description": "%description%",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publisher": "SaraKale",
   "engines": {
     "vscode": "^1.80.0"
@@ -165,6 +165,10 @@
       {
         "command": "noteCollection.importFromText",
         "title": "%noteCollection.importFromText.title%"
+      },
+      {
+        "command": "noteCollection.refreshFolder",
+        "title": "%noteCollection.refreshFolder.title%"
       }
     ],
     "menus": {
@@ -259,11 +263,31 @@
           "group": "1_actions"
         },
         {
+          "command": "noteCollection.refreshFolder",
+          "when": "view == noteCollection.list && viewItem == tag",
+          "group": "1_actions"
+        },
+        {
           "command": "noteCollection.importFiles",
+          "when": "view == noteCollection.list && viewItem == folder",
+          "group": "1_actions"
+        },
+        {
+          "command": "noteCollection.refreshFolder",
           "when": "view == noteCollection.list && viewItem == folder",
           "group": "1_actions"
         }
       ]
+    },
+    "configuration": {
+      "title": "%configuration.title%",
+      "properties": {
+        "noteCollection.autoRefreshFolders": {
+          "type": "boolean",
+          "default": true,
+          "description": "%noteCollection.autoRefreshFolders.description%"
+        }
+      }
     }
   },
   "scripts": {

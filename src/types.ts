@@ -7,6 +7,7 @@ export interface NoteItem {
     paths?: string[];
     tags: string[];
     enabled: boolean;
+    isFolder?: boolean;
 }
 
 export type NoteList = NoteItem[];

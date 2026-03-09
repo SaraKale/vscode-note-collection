@@ -86,5 +86,13 @@
   "msg.tagNameIsReserved": "标签名是系统保留名称，请使用其他名称",
   "msg.tagNameSanitized": "标签名 \"{0}\" 包含非法字符，已自动清理为 \"{1}\"，是否使用清理后的名称？",
   "msg.useSanitized": "使用清理后的名称",
-  "msg.emptyFolder": "(空文件夹)"
+  "msg.emptyFolder": "(空文件夹)",
+  "msg.folderRefreshed": "文件夹 \"{0}\" 已刷新：{1}",
+  "msg.addedFilesSimple": "新增 {0} 个文件",
+  "msg.removedFilesSimple": "移除 {0} 个文件",
+  "msg.newFoldersSimple": "发现 {0} 个新子文件夹",
+  "msg.movedFilesSimple": "更新 {0} 个移动的文件",
+  "msg.folderRemoved": "文件夹 \"{0}\" 已移除：清理了 {1} 个文件和 {2} 个子文件夹",
+  "msg.refreshAllComplete": "刷新完成：移除了 {0} 个不存在的文件，清理了 {1} 个不存在的文件夹",
+  "msg.refreshAllNoChange": "所有文件夹已是最新状态"
 }

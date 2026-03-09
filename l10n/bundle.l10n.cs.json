@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Název štítku je rezervovaný název systému, prosím použijte jiný název",
   "msg.tagNameSanitized": "Název štítku \"{0}\" obsahuje neplatné znaky a byl automaticky vyčištěn na \"{1}\". Chcete použít vyčištěný název?",
   "msg.useSanitized": "Použít vyčištěný název",
-  "msg.emptyFolder": "(Prázdná složka)"
+  "msg.emptyFolder": "(Prázdná složka)",
+  "msg.folderRefreshed Both": "Složka \"{0}\" obnovena: {1} souborů přidáno, {2} souborů odstraněno",
+  "msg.folderRefreshedAdded": "Složka \"{0}\" obnovena: {1} souborů přidáno",
+  "msg.folderRefreshedRemoved": "Složka \"{0}\" obnovena: {2} souborů odstraněno",
+  "msg.folderRefreshed": "Složka \"{0}\" obnovena: {1}",
+  "msg.addedFilesSimple": "{0} souborů přidáno",
+  "msg.removedFilesSimple": "{0} souborů odstraněno",
+  "msg.newFoldersSimple": "{0} nových podsložek nalezeno",
+  "msg.movedFilesSimple": "Aktualizováno {0} přesunutých souborů",
+  "msg.folderRemoved": "Složka \"{0}\" odstraněna: vyčištěno {1} souborů a {2} podsložek",
+  "msg.refreshAllComplete": "Obnovení dokončeno: odstraněno {0} neexistujících souborů, vyčištěno {1} neexistujících složek",
+  "msg.refreshAllNoChange": "Všechny složky jsou aktuální"
 }

@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Удалить тег",
   "noteCollection.toggleCollapseTag.title": "Развернуть/свернуть тег",
   "noteCollection.importFromText.title": "Импорт из текста...",
-  "noteCollection.deleteItems.title": "Удалить выбранные заметки"
+  "noteCollection.deleteItems.title": "Удалить выбранные заметки",
+  "noteCollection.refreshFolder.title": "Обновить папку",
+  "configuration.title": "Коллекция заметок",
+  "noteCollection.autoRefreshFolders.description": "Автоматически обновлять содержимое папки при добавлении или удалении файлов"
 }

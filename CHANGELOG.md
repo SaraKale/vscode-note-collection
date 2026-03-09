@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.6] - 2026-03-09
+
+- Add an automatic refresh function for files/folders, so that when files/folders are added in the file explorer, they will be automatically updated. Sometimes there may be a delay, but users can manually click the refresh button to update to the latest status.
+- When moving or deleting files/folders, the interface does not refresh quickly, and you need to manually click the refresh button to update.
+
 ## [1.0.5] - 2026-03-02
 
 Modify folder logic

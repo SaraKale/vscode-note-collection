@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Tag name is a system reserved name, please use a different name",
   "msg.tagNameSanitized": "Tag name \"{0}\" contains invalid characters and has been auto-sanitized to \"{1}\". Do you want to use the sanitized name?",
   "msg.useSanitized": "Use sanitized name",
-  "msg.emptyFolder": "(Empty Folder)"
+  "msg.emptyFolder": "(Empty Folder)",
+  "msg.folderRefreshed Both": "Folder \"{0}\" refreshed: {1} files added, {2} files removed",
+  "msg.folderRefreshedAdded": "Folder \"{0}\" refreshed: {1} files added",
+  "msg.folderRefreshedRemoved": "Folder \"{0}\" refreshed: {2} files removed",
+  "msg.folderRefreshed": "Folder \"{0}\" refreshed: {1}",
+  "msg.addedFilesSimple": "{0} files added",
+  "msg.removedFilesSimple": "{0} files removed",
+  "msg.newFoldersSimple": "{0} new subfolders found",
+  "msg.movedFilesSimple": "Updated {0} moved files",
+  "msg.folderRemoved": "Folder \"{0}\" removed: cleaned {1} files and {2} subfolders",
+  "msg.refreshAllComplete": "Refresh complete: removed {0} non-existent files, cleaned {1} non-existent folders",
+  "msg.refreshAllNoChange": "All folders are up to date"
 }

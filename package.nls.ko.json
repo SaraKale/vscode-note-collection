@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "태그 삭제",
   "noteCollection.toggleCollapseTag.title": "태그 펼치기/접기",
   "noteCollection.importFromText.title": "텍스트에서 가져오기...",
-  "noteCollection.deleteItems.title": "선택한 노트 삭제"
+  "noteCollection.deleteItems.title": "선택한 노트 삭제",
+  "noteCollection.refreshFolder.title": "폴더 새로고침",
+  "configuration.title": "노트 컬렉션",
+  "noteCollection.autoRefreshFolders.description": "파일이 추가되거나 삭제될 때 폴더의 내용을 자동으로 새로고침"
 }

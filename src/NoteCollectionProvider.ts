@@ -44,7 +44,10 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
     private collapsedState: Set<string> = new Set(); // 存储折叠的标签路径
     private dataFilePath: string;
     private globalState: vscode.Memento;
-    private treeVersion: number = 0; // 新增：用于强制刷新树视图缓存的版本号计数器
+    private treeVersion: number = 0; // 用于强制刷新树视图缓存的版本号计数器
+    private folderWatchers: Map<string, vscode.FileSystemWatcher> = new Map(); // 存储文件夹路径到文件系统监视器的映射
+    private isAutoRefreshEnabled: boolean = true; // 是否启用自动刷新文件夹
+    private refreshDebounceTimer: NodeJS.Timeout | undefined; // 刷新防抖定时器，用于延迟刷新树视图
 
     // 拖放支持的数据类型
     dropMimeTypes = ['text/uri-list'];
@@ -53,8 +56,454 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
     constructor(dataFilePath: string, globalState: vscode.Memento) {
         this.dataFilePath = dataFilePath;
         this.globalState = globalState;
-        this.loadData();
-        this.loadCollapsedState();
+        this.loadData(); // 加载笔记数据
+        this.loadCollapsedState(); // 加载折叠状态
+        this.loadAutoRefreshSetting(); // 加载自动刷新文件夹设置
+        this.setupAllFolderWatchers(); // 设置所有文件夹的文件系统监视器
+    }
+
+    // 加载自动刷新文件夹设置
+    private loadAutoRefreshSetting(): void {
+        const config = vscode.workspace.getConfiguration('noteCollection');
+        this.isAutoRefreshEnabled = config.get<boolean>('autoRefreshFolders', true);
+    }
+
+    // 设置是否启用自动刷新文件夹
+    setAutoRefreshEnabled(enabled: boolean): void {
+        this.isAutoRefreshEnabled = enabled;
+        if (enabled) {
+            this.setupAllFolderWatchers();
+        } else {
+            this.disposeAllWatchers();
+        }
+    }
+
+    // 设置所有文件夹的文件系统监视器
+    private setupAllFolderWatchers(): void {
+        this.disposeAllWatchers();
+        if (!this.isAutoRefreshEnabled) {
+            return;
+        }
+        const folderPaths = this.getAllFolderPaths();
+        for (const folderPath of folderPaths) {
+            this.setupFolderWatcher(folderPath);
+        }
+    }
+
+    // 获取所有文件夹路径
+    private getAllFolderPaths(): string[] {
+        const folderPaths = new Set<string>();
+        this.noteList.forEach(note => {
+            if (note.isFolder && note.rootPath && fs.existsSync(note.rootPath)) {
+                folderPaths.add(note.rootPath);
+            }
+        });
+        return Array.from(folderPaths);
+    }
+
+    // 为指定文件夹设置文件系统监视器
+    private setupFolderWatcher(folderPath: string): void {
+        if (!this.isAutoRefreshEnabled || this.folderWatchers.has(folderPath)) {
+            return;
+        }
+        if (!fs.existsSync(folderPath)) {
+            return;
+        }
+        const watcher = vscode.workspace.createFileSystemWatcher(
+            new vscode.RelativePattern(folderPath, '**/*')
+        );
+        watcher.onDidCreate(async (uri) => {
+            await this.onFolderContentChanged(folderPath, uri.fsPath, 'create'); // 文件或文件夹被创建
+        });
+        watcher.onDidChange(async (uri) => {
+            await this.onFolderContentChanged(folderPath, uri.fsPath, 'change'); // 文件被修改
+        });
+        watcher.onDidDelete(async (uri) => {
+            await this.onFolderContentChanged(folderPath, uri.fsPath, 'delete'); // 文件或文件夹被删除
+        });
+        this.folderWatchers.set(folderPath, watcher);
+    }
+
+   // 处理文件夹内容变化事件
+    private async onFolderContentChanged(folderPath: string, changedPath: string, changeType: 'create' | 'delete' | 'change'): Promise<void> {
+        if (this.refreshDebounceTimer) {
+            clearTimeout(this.refreshDebounceTimer);
+        }
+        this.refreshDebounceTimer = setTimeout(async () => {
+            if (changeType === 'delete' && changedPath === folderPath) {
+                const parentPath = path.dirname(folderPath);
+                const parentFolderNote = this.noteList.find(note => 
+                    note.isFolder && note.rootPath === parentPath
+                );
+                if (parentFolderNote) {
+                    await this.refreshFolderContent(parentPath);
+                } else {
+                    await this.refreshFolderContent(folderPath);
+                }
+            } else {
+                await this.refreshFolderContent(folderPath);
+            }
+        }, 500);
+    }
+
+    // 刷新文件夹内容
+    async refreshFolderContent(folderPath: string): Promise<{ added: number; removed: number; newFolders: number; moved: number; cleanedFolders: number }> {
+        const folderNotes = this.noteList.filter(note => 
+            note.isFolder && note.rootPath === folderPath
+        );
+        // 如果文件夹不存在，清理相关笔记
+        if (!fs.existsSync(folderPath)) {
+            let cleanedFolders = 0;
+            let removedFiles = 0;
+            // 获取该文件夹对应的标签路径
+            if (folderNotes.length > 0) {
+                const tagPath = folderNotes[0].tags[0];
+                if (tagPath) {
+                    const allTagsToRemove: string[] = [tagPath];
+                    this.noteList.forEach(note => {
+                        note.tags.forEach(tag => {
+                            if (tag.startsWith(tagPath + '/')) {
+                                allTagsToRemove.push(tag);
+                            }
+                        });
+                    });
+                    // 移除所有包含这些标签的笔记
+                    const notesToRemove: NoteItem[] = [];
+                    this.noteList.forEach(note => {
+                        if (note.tags.some(tag => allTagsToRemove.includes(tag))) {
+                            notesToRemove.push(note);
+                            if (note.isFolder) {
+                                cleanedFolders++;
+                            } else {
+                                removedFiles++;
+                            }
+                        }
+                    });
+
+                    this.noteList = this.noteList.filter(note => !notesToRemove.includes(note));
+                    // 移除文件夹监视器
+                    this.folderWatchers.delete(folderPath);
+                    if (cleanedFolders > 0 || removedFiles > 0) {
+                        this.saveData();
+                        this._onDidChangeTreeData.fire();
+                        vscode.window.showInformationMessage(
+                            Localize.localize('msg.folderRemoved', path.basename(folderPath), removedFiles.toString(), cleanedFolders.toString())
+                        );
+                    }
+                }
+            }
+            
+            return { added: 0, removed: removedFiles, newFolders: 0, moved: 0, cleanedFolders };
+        }
+        // 如果文件夹存在但没有对应的笔记，直接返回
+        if (folderNotes.length === 0) {
+            return { added: 0, removed: 0, newFolders: 0, moved: 0, cleanedFolders: 0 };
+        }
+        const tagPath = folderNotes[0].tags[0];
+        if (!tagPath) {
+            return { added: 0, removed: 0, newFolders: 0, moved: 0, cleanedFolders: 0 };
+        }
+        
+        const result = await this.syncFolderRecursive(folderPath, tagPath);
+        // 刷新后清理一次，移除已被删除的文件笔记
+        if (result.added > 0 || result.removed > 0 || result.newFolders > 0 || result.moved > 0) {
+            this.saveData();
+            this._onDidChangeTreeData.fire();
+            
+            const parts = [];
+            if (result.added > 0) parts.push(Localize.localize('msg.addedFilesSimple', result.added.toString())); // 新增 {0} 个文件
+            if (result.removed > 0) parts.push(Localize.localize('msg.removedFilesSimple', result.removed.toString())); // 移除 {0} 个文件
+            if (result.newFolders > 0) parts.push(Localize.localize('msg.newFoldersSimple', result.newFolders.toString())); // 发现 {0} 个新子文件夹
+            if (result.moved > 0) parts.push(Localize.localize('msg.movedFilesSimple', result.moved.toString())); // 更新 {0} 个移动的文件
+            
+            vscode.window.showInformationMessage(
+                Localize.localize('msg.folderRefreshed', path.basename(folderPath), parts.join(', ')) // 文件夹 \"{0}\" 已刷新：{1}
+            );
+        }
+        
+        return { ...result, cleanedFolders: 0 };
+    }
+
+    // 刷新所有文件夹内容，包括子文件夹
+    async refreshAllFolders(): Promise<void> {
+        const folderPaths = this.getAllFolderPaths();
+        let totalRemoved = 0;
+        let totalCleanedFolders = 0;
+        
+        for (const folderPath of folderPaths) {
+            const result = await this.refreshFolderContent(folderPath);
+            totalRemoved += result.removed;
+            totalCleanedFolders += result.cleanedFolders;
+        }
+        
+        const cleanedResult = this.cleanupMissingFiles();
+        totalRemoved += cleanedResult.removedFiles;
+        // 刷新后清理一次，移除已被删除的文件笔记
+        if (totalRemoved > 0 || totalCleanedFolders > 0) {
+            this.saveData();
+            this._onDidChangeTreeData.fire();
+            vscode.window.showInformationMessage(
+                Localize.localize('msg.refreshAllComplete', totalRemoved.toString(), totalCleanedFolders.toString())
+            );
+        } else {
+            vscode.window.showInformationMessage(Localize.localize('msg.refreshAllNoChange'));
+        }
+    }
+
+    // 清理已被删除的文件笔记（不依赖于文件夹监视器事件，手动触发）
+    private cleanupMissingFiles(): { removedFiles: number; removedFolders: number } {
+        let removedFiles = 0;
+        let removedFolders = 0;
+        
+        const notesToRemove: NoteItem[] = [];
+        
+        this.noteList.forEach(note => {
+            if (note.rootPath && !fs.existsSync(note.rootPath)) {
+                notesToRemove.push(note);
+                if (note.isFolder) {
+                    removedFolders++;
+                } else {
+                    removedFiles++;
+                }
+            }
+        });
+        
+        if (notesToRemove.length > 0) {
+            this.noteList = this.noteList.filter(note => !notesToRemove.includes(note));
+        }
+        
+        return { removedFiles, removedFolders };
+    }
+
+    // 递归同步文件夹内容
+    private async syncFolderRecursive(folderPath: string, tagPath: string): Promise<{ added: number; removed: number; newFolders: number; moved: number }> {
+        let addedCount = 0;
+        let removedCount = 0;
+        let newFolderCount = 0;
+        let movedCount = 0;
+        
+        if (!fs.existsSync(folderPath)) {
+            return { added: 0, removed: 0, newFolders: 0, moved: 0 };
+        }
+        
+        const existingFilesInTag = new Map<string, NoteItem>();
+        this.noteList.forEach(note => {
+            if (note.tags.includes(tagPath) && note.rootPath && !note.isFolder) {
+                existingFilesInTag.set(note.rootPath, note);
+            }
+        });
+        
+        const existingFoldersInTag = new Map<string, NoteItem>();
+        this.noteList.forEach(note => {
+            if (note.tags.includes(tagPath) && note.rootPath && note.isFolder) {
+                existingFoldersInTag.set(note.rootPath, note);
+            }
+        });
+        
+        const directEntries = this.getDirectFolderEntries(folderPath);
+        const currentFolderPaths = new Set<string>();
+        
+        for (const entry of directEntries) {
+            const fullPath = entry.path;
+            currentFolderPaths.add(fullPath);
+            
+            if (entry.isDirectory) {
+                const folderName = path.basename(fullPath);
+                const subTagName = this.sanitizeTagName(folderName);
+                const subTagPath = `${tagPath}/${subTagName}`;
+                
+                const subTagExists = this.noteList.some(note => note.tags.includes(subTagPath));
+                if (!subTagExists) {
+                    newFolderCount++;
+                    this.setupFolderWatcher(fullPath);
+                    
+                    const subFiles = this.getAllFilesInFolder(fullPath);
+                    for (const subFile of subFiles) {
+                        const subFileName = path.basename(subFile);
+                        const existingNote = this.noteList.find(n => n.rootPath === subFile);
+                        if (!existingNote) {
+                            const subRelativePath = path.relative(fullPath, subFile);
+                            const subFileTagPath = this.buildTagPathFromRelativePath(subTagPath, subRelativePath);
+                            const finalTagPath = subFileTagPath || subTagPath;
+                            const newNote: NoteItem = {
+                                name: subFileName,
+                                rootPath: subFile,
+                                paths: [],
+                                tags: [finalTagPath],
+                                enabled: true
+                            };
+                            this.noteList.push(newNote);
+                            addedCount++;
+                        }
+                    }
+                    
+                    if (subFiles.length === 0) {
+                        const emptyNote: NoteItem = {
+                            name: Localize.localize('msg.emptyFolder'),
+                            rootPath: '',
+                            paths: [],
+                            tags: [subTagPath],
+                            enabled: true
+                        };
+                        this.noteList.push(emptyNote);
+                    }
+                    
+                    const folderNote: NoteItem = {
+                        name: folderName,
+                        rootPath: fullPath,
+                        paths: [],
+                        tags: [subTagPath],
+                        enabled: true,
+                        isFolder: true
+                    };
+                    this.noteList.push(folderNote);
+                } else {
+                    const subResult = await this.syncFolderRecursive(fullPath, subTagPath);
+                    addedCount += subResult.added;
+                    removedCount += subResult.removed;
+                    newFolderCount += subResult.newFolders;
+                    movedCount += subResult.moved;
+                }
+            } else {
+                const existingNote = existingFilesInTag.get(fullPath);
+                if (!existingNote) {
+                    const fileName = path.basename(fullPath);
+                    const newNote: NoteItem = {
+                        name: fileName,
+                        rootPath: fullPath,
+                        paths: [],
+                        tags: [tagPath],
+                        enabled: true
+                    };
+                    this.noteList.push(newNote);
+                    addedCount++;
+                }
+            }
+        }
+        
+        for (const [filePath, note] of existingFilesInTag) {
+            if (!fs.existsSync(filePath)) {
+                const index = this.noteList.indexOf(note);
+                if (index > -1) {
+                    this.noteList.splice(index, 1);
+                }
+                removedCount++;
+            }
+        }
+        
+        for (const [folderPath, note] of existingFoldersInTag) {
+            if (!currentFolderPaths.has(folderPath)) {
+                const subTagName = path.basename(folderPath);
+                const subTagPath = `${tagPath}/${subTagName}`;
+                
+                const notesToRemove: NoteItem[] = [];
+                this.noteList.forEach(n => {
+                    if (n.tags.includes(subTagPath) || n.tags.some(t => t.startsWith(subTagPath + '/'))) {
+                        notesToRemove.push(n);
+                    }
+                });
+                
+                for (const n of notesToRemove) {
+                    const index = this.noteList.indexOf(n);
+                    if (index > -1) {
+                        this.noteList.splice(index, 1);
+                        if (n.isFolder) {
+                            newFolderCount--;
+                        } else {
+                            removedCount++;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return { added: addedCount, removed: removedCount, newFolders: newFolderCount, moved: movedCount };
+    }
+
+    // 获取文件夹中的直接子项（文件和文件夹），不递归进入子文件夹
+    private getDirectFolderEntries(folderPath: string): { path: string; isDirectory: boolean }[] {
+        const entries: { path: string; isDirectory: boolean }[] = [];
+        try {
+            const items = fs.readdirSync(folderPath);
+            for (const item of items) {
+                if (item.startsWith('.') || item === 'Thumbs.db' || item === 'desktop.ini') {
+                    continue;
+                }
+                const fullPath = path.join(folderPath, item);
+                try {
+                    const stat = fs.statSync(fullPath);
+                    entries.push({ path: fullPath, isDirectory: stat.isDirectory() });
+                } catch (e) {
+                    console.warn(`Cannot access: ${fullPath}`);
+                }
+            }
+        } catch (e) {
+            console.warn(`Cannot read folder: ${folderPath}`);
+        }
+        return entries;
+    }
+
+    // 根据相对路径构建标签路径
+    private buildTagPathFromRelativePath(baseTagPath: string, relativePath: string): string | null {
+        const pathParts = relativePath.split(path.sep);
+        if (pathParts.length <= 1) {
+            return null;
+        }
+        const folderParts = pathParts.slice(0, -1);
+        let newTagPath = baseTagPath;
+        for (const folder of folderParts) {
+            const sanitizedFolder = this.sanitizeTagName(folder);
+            newTagPath = `${newTagPath}/${sanitizedFolder}`;
+        }
+        return newTagPath;
+    }
+
+    // 获取文件夹中的所有文件路径（递归）
+    private getAllFilesInFolder(folderPath: string): string[] {
+        const files: string[] = [];
+        const scanFolder = (currentPath: string) => {
+            try {
+                const entries = fs.readdirSync(currentPath);
+                for (const entry of entries) {
+                    if (entry.startsWith('.') || entry === 'Thumbs.db' || entry === 'desktop.ini') {
+                        continue;
+                    }
+                    const fullPath = path.join(currentPath, entry);
+                    try {
+                        const stat = fs.statSync(fullPath);
+                        if (stat.isDirectory()) {
+                            scanFolder(fullPath);
+                        } else {
+                            files.push(fullPath);
+                        }
+                    } catch (e) {
+                        console.warn(`Cannot access: ${fullPath}`);
+                    }
+                }
+            } catch (e) {
+                console.warn(`Cannot read folder: ${currentPath}`);
+            }
+        };
+        scanFolder(folderPath);
+        return files;
+    }
+
+    // 释放所有文件夹监视器
+    private disposeAllWatchers(): void {
+        this.folderWatchers.forEach(watcher => watcher.dispose());
+        this.folderWatchers.clear();
+    }
+
+    // 组件销毁时调用，清理资源
+    dispose(): void {
+        this.disposeAllWatchers();
+        if (this.refreshDebounceTimer) {
+            clearTimeout(this.refreshDebounceTimer);
+        }
+    }
+
+    getNoteList(): NoteList {
+        return this.noteList;
     }
 
     // 核心方法：从JSON文件加载数据
@@ -62,6 +511,25 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         if (fs.existsSync(this.dataFilePath)) {
             const data = fs.readFileSync(this.dataFilePath, 'utf-8');
             this.noteList = JSON.parse(data);
+            // 检查rootPath是否为文件夹，若是则设置isFolder为true
+            let needsSave = false;
+            this.noteList.forEach(note => {
+                if (note.rootPath && !note.isFolder) {
+                    try {
+                        const stat = fs.statSync(note.rootPath);
+                        if (stat.isDirectory()) {
+                            note.isFolder = true;
+                            needsSave = true;
+                        }
+                    } catch (e) {
+                        console.warn(`Cannot check path: ${note.rootPath}`);
+                    }
+                }
+            });
+            
+            if (needsSave) {
+                this.saveData();
+            }
         } else {
             this.noteList = [];
         }
@@ -72,11 +540,11 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
     }
     // 加载和保存标签的折叠状态
     private loadCollapsedState(): void {
-        this.collapsedState = new Set(this.globalState.get('noteCollection.collapsedTags', []));
+        this.collapsedState = new Set(this.globalState.get('noteCollection.collapsedTags', [])); // 从全局状态加载已折叠的标签
     }
     // 保存折叠状态到全局状态
     private saveCollapsedState(): void {
-        this.globalState.update('noteCollection.collapsedTags', Array.from(this.collapsedState));
+        this.globalState.update('noteCollection.collapsedTags', Array.from(this.collapsedState)); // 保存当前已折叠的标签
     }
 
     // 实现 vscode.TreeDataProvider 接口
@@ -96,7 +564,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                 ? vscode.TreeItemCollapsibleState.Collapsed 
                 : vscode.TreeItemCollapsibleState.Expanded;
 
-            // 【关键】：绑定带有版本号的 ID
+            // 绑定带有版本号的 ID
             element.id = `tag-${element.tagPath}-v${this.treeVersion}`;
         }
         return element;
@@ -158,79 +626,20 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                 items.push(childTagItem);
             });
             
-            // 2. 添加该标签下的笔记文件
-            // 过滤出启用状态且包含当前标签的笔记
             const notes = this.noteList.filter(note =>
-                note.enabled && note.tags.some(tag => this.getTagPath(tag) === element.tagPath)
+                note.enabled && note.tags.some(tag => this.getTagPath(tag) === element.tagPath) && !note.isFolder
             );
             
-            // 构建文件夹树结构
-            const folderMap = new Map<string, TreeNoteItem>(); // 存储文件夹节点
-            const fileItems: TreeNoteItem[] = []; // 存储文件节点
+            const fileItems: TreeNoteItem[] = [];
             
             notes.forEach(note => {
-                if (!note.rootPath) return; // 跳过没有路径的笔记
-                
-                const dirPath = path.dirname(note.rootPath); // 获取文件所在目录
-                const fileName = path.basename(note.rootPath); // 获取文件名
-                
-                // 检查是否是文件夹（通过判断是否有子文件）
-                const isFolder = fs.existsSync(note.rootPath) && fs.statSync(note.rootPath).isDirectory();
-                
-                if (isFolder) {
-                    // 如果是文件夹，创建文件夹节点
-                    if (!folderMap.has(note.rootPath)) {
-                        const folderItem = new TreeNoteItem(
-                            fileName,
-                            vscode.TreeItemCollapsibleState.Collapsed,
-                            'folder',
-                            undefined,
-                            undefined,
-                            note.rootPath
-                        );
-                        folderItem.id = `folder-${note.rootPath}`;
-                        folderItem.contextValue = 'folder';
-                        
-                        // 检查文件夹是否存在
-                        const folderExists = fs.existsSync(note.rootPath);
-                        if (folderExists) {
-                            folderItem.iconPath = new vscode.ThemeIcon('folder');
-                        } else {
-                            folderItem.iconPath = vscode.Uri.joinPath(vscode.Uri.file(path.join(__dirname, '..')), 'media', 'Warning.svg'); // 文件夹不存在，显示警告图标
-                            folderItem.description = Localize.localize('msg.fileMissing'); // 文件夹不存在
-                            folderItem.tooltip = Localize.localize('msg.fileMovedOrDeleted', fileName); // 文件夹已被移动或删除
-                        }
-                        
-                        folderMap.set(note.rootPath, folderItem);
-                    }
-                } else {
-                    // 如果是文件，检查是否需要放在文件夹下
-                    const relativePath = dirPath;
-                    if (folderMap.has(relativePath)) {
-                        // 文件夹已存在，文件作为文件夹的子项
-                        // 这里简化处理，暂时不实现文件夹嵌套
-                        fileItems.push(this.createFileTreeItem(note));
-                    } else {
-                        // 直接添加文件节点
-                        fileItems.push(this.createFileTreeItem(note));
-                    }
-                }
+                if (!note.rootPath) return;
+                fileItems.push(this.createFileTreeItem(note));
             });
             
-            // 合并子标签、文件夹和文件
-            items.push(...Array.from(folderMap.values()), ...fileItems);
-            return Promise.resolve(items);
-        } else if (element.type === 'folder' && element.folderPath) {
-            // 文件夹节点：返回文件夹内的文件
-            // 过滤出启用状态且所在目录等于当前文件夹路径的笔记
-            const notes = this.noteList.filter(note =>
-                note.enabled && note.rootPath && path.dirname(note.rootPath) === element.folderPath
-            );
-            // 为每个笔记创建文件树节点
-            const items = notes.map(note => this.createFileTreeItem(note));
+            items.push(...fileItems);
             return Promise.resolve(items);
         }
-        // 其他情况返回空数组
         return Promise.resolve([]);
     }
 
@@ -259,7 +668,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                         tagPath
                     );
 
-                    // 【关键】：绑定带有版本号的 ID
+                    // 绑定带有版本号的 ID
                     treeItem.id = `tag-${tagPath}-v${this.treeVersion}`;
                     treeItem.contextValue = 'tag';
                     tagMap.set(tagPath, treeItem);
@@ -375,6 +784,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         treeDataTransfer.set('application/vnd.code.tree.noteCollection.list', new vscode.DataTransferItem(JSON.stringify(serializedItems)));
     }
 
+    // 处理拖放事件
     async handleDrop(target: TreeNoteItem | undefined, sources: vscode.DataTransfer, token: vscode.CancellationToken): Promise<void> {
         // 检查是否是从树形视图拖拽的文件
         const treeTransferItem = sources.get('application/vnd.code.tree.noteCollection.list');
@@ -611,7 +1021,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
 
     // 右键菜单-切换单个标签的折叠状态
     toggleCollapse(tagPath: string): void {
-        // 【关键修复】：增加版本号，强制 VS Code 刷新该节点的 UI 状态
+        // 增加版本号，强制VSCode刷新该节点的UI状态
         this.treeVersion++;
         // 切换折叠状态
         if (this.collapsedState.has(tagPath)) {
@@ -1139,20 +1549,15 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
             const filePath = uri.fsPath;
             const fileName = path.basename(filePath);
             
-            // 检查是否是文件夹
             if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-                // 导入文件夹：创建同名标签
                 let newTagName = fileName;
                 
-                // 构建完整的标签路径
                 let fullTagPath = tagPath ? `${tagPath}/${newTagName}` : newTagName;
                 
-                // 检查标签是否已存在
                 const tagExists = this.noteList.some(note => note.tags.includes(fullTagPath));
                 if (tagExists) {
-                    // 如果标签已存在，询问用户是否覆盖
                     const choice = await vscode.window.showWarningMessage(
-                        Localize.localize('msg.tagAlreadyExists', fullTagPath), // 标签已存在
+                        Localize.localize('msg.tagAlreadyExists', fullTagPath), // 标签 \"{0}\" 已存在，是否覆盖？
                         Localize.localize('msg.overwrite'), // 覆盖
                         Localize.localize('msg.cancel') // 取消
                     );
@@ -1163,7 +1568,6 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                     createdTags.push(fullTagPath);
                 }
                 
-                // 导入文件夹内的所有文件到新标签
                 addedCount += await this.importFolderToTag(filePath, fullTagPath);
                 continue;
             }
@@ -1271,17 +1675,32 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return addedCount;
     }
 
-    // 导入文件夹内的所有文件到指定标签（递归，子文件夹创建同名子标签）
+    // 导入文件夹内的所有文件到指定标签（递归）
     private async importFolderToTag(folderPath: string, tagPath: string): Promise<number> {
         let addedCount = 0;
-        let hasFiles = false; // 标记当前文件夹是否有文件
         
         try {
-            // 检查文件夹是否存在且可访问
             if (!fs.existsSync(folderPath)) {
                 console.warn(`Folder does not exist: ${folderPath}`);
                 return 0;
             }
+            
+            const existingFolderNote = this.noteList.find(note => 
+                note.isFolder && note.rootPath === folderPath
+            );
+            if (!existingFolderNote) {
+                const folderNote: NoteItem = {
+                    name: path.basename(folderPath),
+                    rootPath: folderPath,
+                    paths: [],
+                    tags: [tagPath],
+                    enabled: true,
+                    isFolder: true
+                };
+                this.noteList.push(folderNote);
+            }
+            
+            this.setupFolderWatcher(folderPath);
             
             const files = fs.readdirSync(folderPath);
             
@@ -1291,31 +1710,19 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                 try {
                     const stat = fs.statSync(fullPath);
                     
-                    // 跳过系统文件和隐藏文件
                     if (file.startsWith('.') || file === 'Thumbs.db' || file === 'desktop.ini') {
                         continue;
                     }
                     
                     if (stat.isDirectory()) {
-                        // 子文件夹创建同名子标签（支持无限层级递归）
                         const subTagName = this.sanitizeTagName(file);
                         const subTagPath = `${tagPath}/${subTagName}`;
                         
-                        // 递归导入子文件夹
                         const subAddedCount = await this.importFolderToTag(fullPath, subTagPath);
                         addedCount += subAddedCount;
-                        
-                        // 如果子文件夹有文件，标记当前文件夹也有内容
-                        if (subAddedCount > 0) {
-                            hasFiles = true;
-                        }
                     } else {
-                        // 支持所有文件类型
-                        // 导入文件到指定标签
                         const fileName = path.basename(fullPath);
-                        hasFiles = true; // 标记有文件
                         
-                        // 检查该标签下是否已存在同名文件
                         const existsInTag = this.noteList.some(note => 
                             note.rootPath === fullPath && note.tags.includes(tagPath)
                         );
@@ -1323,16 +1730,13 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                             continue;
                         }
                         
-                        // 检查该文件是否已经在其他标签中存在
                         const existingNote = this.noteList.find(note => note.rootPath === fullPath);
                         if (existingNote) {
-                            // 如果文件已存在，只需添加到当前标签
                             if (!existingNote.tags.includes(tagPath)) {
                                 existingNote.tags.push(tagPath);
                                 addedCount++;
                             }
                         } else {
-                            // 如果文件不存在，创建新笔记
                             const newNote: NoteItem = {
                                 name: fileName,
                                 rootPath: fullPath,
@@ -1346,17 +1750,13 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
                     }
                 } catch (fileError) {
                     console.warn(`Error processing file ${fullPath}:`, fileError);
-                    // 继续处理其他文件，不中断整个导入过程
                 }
             }
             
-            // 确保每个文件夹都有对应的标签（即使没有文件也要创建标签以保持层级结构）
-            // 检查该标签是否已存在
             const tagExists = this.noteList.some(note => note.tags.includes(tagPath));
             if (!tagExists) {
-                // 创建空标签项目
                 const emptyNote: NoteItem = {
-                    name: Localize.localize('msg.emptyFolder'), // 空文件夹
+                    name: Localize.localize('msg.emptyFolder'),
                     rootPath: '',
                     paths: [],
                     tags: [tagPath],

@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "タグを削除",
   "noteCollection.toggleCollapseTag.title": "タグを展開/折りたたむ",
   "noteCollection.importFromText.title": "テキストからインポート...",
-  "noteCollection.deleteItems.title": "選択中のノートを削除"
+  "noteCollection.deleteItems.title": "選択中のノートを削除",
+  "noteCollection.refreshFolder.title": "フォルダを更新",
+  "configuration.title": "ノートコレクション",
+  "noteCollection.autoRefreshFolders.description": "ファイルの追加・削除時にフォルダの内容を自動的に更新"
 }

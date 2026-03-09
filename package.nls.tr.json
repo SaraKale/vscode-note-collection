@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Etiketi sil",
   "noteCollection.toggleCollapseTag.title": "Etiketi Daralt/Genişlet",
   "noteCollection.importFromText.title": "Metinden içe aktar...",
-  "noteCollection.deleteItems.title": "Seçili notları sil"
+  "noteCollection.deleteItems.title": "Seçili notları sil",
+  "noteCollection.refreshFolder.title": "Klasörü yenile",
+  "configuration.title": "Not Koleksiyonu",
+  "noteCollection.autoRefreshFolders.description": "Klasöre dosya eklendiğinde veya kaldırıldığında klasör içeriğini otomatik olarak yenile"
 }

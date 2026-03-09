@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "删除标签",
   "noteCollection.toggleCollapseTag.title": "展开/折叠标签",
   "noteCollection.importFromText.title": "手动输入地址...",
-  "noteCollection.deleteItems.title": "删除选中的笔记"
+  "noteCollection.deleteItems.title": "删除选中的笔记",
+  "noteCollection.refreshFolder.title": "刷新文件夹",
+  "configuration.title": "笔记收藏集",
+  "noteCollection.autoRefreshFolders.description": "当文件夹中添加或删除文件时自动刷新文件夹内容"
 }

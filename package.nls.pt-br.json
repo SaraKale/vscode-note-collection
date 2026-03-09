@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Excluir tag",
   "noteCollection.toggleCollapseTag.title": "Expandir/recolher tag",
   "noteCollection.importFromText.title": "Importar de texto...",
-  "noteCollection.deleteItems.title": "Excluir notas selecionadas"
+  "noteCollection.deleteItems.title": "Excluir notas selecionadas",
+  "noteCollection.refreshFolder.title": "Atualizar pasta",
+  "configuration.title": "Coleção de Notas",
+  "noteCollection.autoRefreshFolders.description": "Atualizar automaticamente o conteúdo da pasta quando arquivos são adicionados ou removidos"
 }

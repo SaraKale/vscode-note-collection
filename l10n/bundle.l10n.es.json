@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "El nombre de la etiqueta es un nombre reservado del sistema, por favor use un nombre diferente",
   "msg.tagNameSanitized": "El nombre de la etiqueta \"{0}\" contiene caracteres inválidos y ha sido limpiado automáticamente a \"{1}\". ¿Desea usar el nombre limpio?",
   "msg.useSanitized": "Usar nombre limpio",
-  "msg.emptyFolder": "(Carpeta vacía)"
+  "msg.emptyFolder": "(Carpeta vacía)",
+  "msg.folderRefreshed Both": "Carpeta \"{0}\" actualizada: {1} archivos añadidos, {2} archivos eliminados",
+  "msg.folderRefreshedAdded": "Carpeta \"{0}\" actualizada: {1} archivos añadidos",
+  "msg.folderRefreshedRemoved": "Carpeta \"{0}\" actualizada: {2} archivos eliminados",
+  "msg.folderRefreshed": "Carpeta \"{0}\" actualizada: {1}",
+  "msg.addedFilesSimple": "{0} archivos añadidos",
+  "msg.removedFilesSimple": "{0} archivos eliminados",
+  "msg.newFoldersSimple": "{0} nuevas subcarpetas encontradas",
+  "msg.movedFilesSimple": "Actualizados {0} archivos movidos",
+  "msg.folderRemoved": "Carpeta \"{0}\" eliminada: limpiados {1} archivos y {2} subcarpetas",
+  "msg.refreshAllComplete": "Actualización completada: eliminados {0} archivos inexistentes, limpiadas {1} carpetas inexistentes",
+  "msg.refreshAllNoChange": "Todas las carpetas están actualizadas"
 }

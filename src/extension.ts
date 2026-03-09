@@ -84,9 +84,8 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         // 刷新列表
-        vscode.commands.registerCommand('noteCollection.refresh', () => {
-            treeDataProvider.refresh();
-            vscode.window.showInformationMessage(Localize.localize('msg.refreshedList')); // 刷新笔记列表
+        vscode.commands.registerCommand('noteCollection.refresh', async () => {
+            await treeDataProvider.refreshAllFolders();
         }),
 
         // 搜索笔记
@@ -397,6 +396,33 @@ export function activate(context: vscode.ExtensionContext) {
 
     commands.forEach(cmd => context.subscriptions.push(cmd));
     context.subscriptions.push(treeView);
+    
+    context.subscriptions.push(
+        vscode.workspace.onDidChangeConfiguration(e => {
+            if (e.affectsConfiguration('noteCollection.autoRefreshFolders')) {
+                const config = vscode.workspace.getConfiguration('noteCollection');
+                const enabled = config.get<boolean>('autoRefreshFolders', true);
+                treeDataProvider.setAutoRefreshEnabled(enabled);
+            }
+        })
+    );
+    
+    context.subscriptions.push(
+        vscode.commands.registerCommand('noteCollection.refreshFolder', async (node: any) => {
+            const tagPath = node?.tagPath;
+            if (tagPath) {
+                const noteList = treeDataProvider.getNoteList();
+                const folderNote = noteList.find((note: any) => 
+                    note.isFolder && note.tags.includes(tagPath)
+                );
+                if (folderNote && folderNote.rootPath) {
+                    await treeDataProvider.refreshFolderContent(folderNote.rootPath);
+                }
+            }
+        })
+    );
+    
+    context.subscriptions.push({
+        dispose: () => treeDataProvider.dispose()
+    });
 }
-
-export function deactivate() {}

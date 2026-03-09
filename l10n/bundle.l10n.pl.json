@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Nazwa tagu jest zarezerwowaną nazwą systemową, proszę użyć innej nazwy",
   "msg.tagNameSanitized": "Nazwa tagu \"{0}\" zawiera nieprawidłowe znaki i została automatycznie oczyszczona na \"{1}\". Czy chcesz użyć oczyszczonej nazwy?",
   "msg.useSanitized": "Użyj oczyszczonej nazwy",
-  "msg.emptyFolder": "(Pusty folder)"
+  "msg.emptyFolder": "(Pusty folder)",
+  "msg.folderRefreshed Both": "Folder \"{0}\" odświeżony: {1} pliki dodane, {2} pliki usunięte",
+  "msg.folderRefreshedAdded": "Folder \"{0}\" odświeżony: {1} pliki dodane",
+  "msg.folderRefreshedRemoved": "Folder \"{0}\" odświeżony: {2} pliki usunięte",
+  "msg.folderRefreshed": "Folder \"{0}\" odświeżony: {1}",
+  "msg.addedFilesSimple": "{0} pliki dodane",
+  "msg.removedFilesSimple": "{0} pliki usunięte",
+  "msg.newFoldersSimple": "{0} nowe podfoldery znalezione",
+  "msg.movedFilesSimple": "Zaktualizowano {0} przeniesionych plików",
+  "msg.folderRemoved": "Folder \"{0}\" usunięty: wyczyszczono {1} plików i {2} podfolderów",
+  "msg.refreshAllComplete": "Odświeżanie zakończone: usunięto {0} nieistniejących plików, wyczyszczono {1} nieistniejących folderów",
+  "msg.refreshAllNoChange": "Wszystkie foldery są aktualne"
 }

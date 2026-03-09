@@ -26,6 +26,14 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
   - English, 简体中文, 繁體中文, Français, Deutsch, Español
   - 日本語, 한국어, Русский, Italiano, Português (Brasil), Türkçe, Polski, Čeština
 
+## Guida video
+
+- [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+
+- [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+
 ## Installazione
 
 ### Installa dal Marketplace VS Code

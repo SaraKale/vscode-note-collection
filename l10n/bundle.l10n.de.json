@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Tagname ist ein systemreservierter Name, bitte verwenden Sie einen anderen Namen",
   "msg.tagNameSanitized": "Tagname \"{0}\" enthält ungültige Zeichen und wurde automatisch zu \"{1}\" bereinigt. Möchten Sie den bereinigten Namen verwenden?",
   "msg.useSanitized": "Bereinigten Namen verwenden",
-  "msg.emptyFolder": "(Leerer Ordner)"
+  "msg.emptyFolder": "(Leerer Ordner)",
+  "msg.folderRefreshed Both": "Ordner \"{0}\" aktualisiert: {1} Dateien hinzugefügt, {2} Dateien entfernt",
+  "msg.folderRefreshedAdded": "Ordner \"{0}\" aktualisiert: {1} Dateien hinzugefügt",
+  "msg.folderRefreshedRemoved": "Ordner \"{0}\" aktualisiert: {2} Dateien entfernt",
+  "msg.folderRefreshed": "Ordner \"{0}\" aktualisiert: {1}",
+  "msg.addedFilesSimple": "{0} Dateien hinzugefügt",
+  "msg.removedFilesSimple": "{0} Dateien entfernt",
+  "msg.newFoldersSimple": "{0} neue Unterordner gefunden",
+  "msg.movedFilesSimple": "{0} verschobene Dateien aktualisiert",
+  "msg.folderRemoved": "Ordner \"{0}\" entfernt: {1} Dateien und {2} Unterordner bereinigt",
+  "msg.refreshAllComplete": "Aktualisierung abgeschlossen: {0} nicht existierende Dateien entfernt, {1} nicht existierende Ordner bereinigt",
+  "msg.refreshAllNoChange": "Alle Ordner sind auf dem neuesten Stand"
 }

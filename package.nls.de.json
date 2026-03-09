@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Tag löschen",
   "noteCollection.toggleCollapseTag.title": "Tag ein-/ausklappen",
   "noteCollection.importFromText.title": "Aus Text importieren...",
-  "noteCollection.deleteItems.title": "Ausgewählte Notizen löschen"
+  "noteCollection.deleteItems.title": "Ausgewählte Notizen löschen",
+  "noteCollection.refreshFolder.title": "Ordner aktualisieren",
+  "configuration.title": "Notizsammlung",
+  "noteCollection.autoRefreshFolders.description": "Ordnerinhalt automatisch aktualisieren, wenn Dateien hinzugefügt oder entfernt werden"
 }

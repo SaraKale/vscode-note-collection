@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Delete Tag",
   "noteCollection.toggleCollapseTag.title": "Expand/Collapse Tag",
   "noteCollection.importFromText.title": "Import from Text...",
-  "noteCollection.deleteItems.title": "Delete Selected Notes"
+  "noteCollection.deleteItems.title": "Delete Selected Notes",
+  "noteCollection.refreshFolder.title": "Refresh Folder",
+  "configuration.title": "Note Collection",
+  "noteCollection.autoRefreshFolders.description": "Automatically refresh folder contents when files are added or removed"
 }

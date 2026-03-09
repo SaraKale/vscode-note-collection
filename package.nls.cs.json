@@ -25,5 +25,8 @@
   "noteCollection.deleteTagWithChildren": "Smazat štítek",
   "noteCollection.toggleCollapseTag.title": "Rozbalit/sbalit štítek",
   "noteCollection.importFromText.title": "Importovat z textu...",
-  "noteCollection.deleteItems.title": "Smazat vybrané poznámky"
+  "noteCollection.deleteItems.title": "Smazat vybrané poznámky",
+  "noteCollection.refreshFolder.title": "Obnovit složku",
+  "configuration.title": "Kolekce poznámek",
+  "noteCollection.autoRefreshFolders.description": "Automaticky obnovovat obsah složky při přidání nebo odstranění souborů"
 }

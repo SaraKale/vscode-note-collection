@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "태그 이름은 시스템 예약 이름입니다. 다른 이름을 사용하세요",
   "msg.tagNameSanitized": "태그 이름 \"{0}\"에 잘못된 문자가 포함되어 있어 자동으로 \"{1}\"로 정제되었습니다. 정제된 이름을 사용하시겠습니까?",
   "msg.useSanitized": "정제된 이름 사용",
-  "msg.emptyFolder": "(빈 폴더)"
+  "msg.emptyFolder": "(빈 폴더)",
+  "msg.folderRefreshed Both": "폴더 \"{0}\"가 새로고침되었습니다: {1}개 파일 추가, {2}개 파일 삭제",
+  "msg.folderRefreshedAdded": "폴더 \"{0}\"가 새로고침되었습니다: {1}개 파일 추가",
+  "msg.folderRefreshedRemoved": "폴더 \"{0}\"가 새로고침되었습니다: {2}개 파일 삭제",
+  "msg.folderRefreshed": "폴더 \"{0}\"가 새로고침되었습니다: {1}",
+  "msg.addedFilesSimple": "{0}개 파일 추가",
+  "msg.removedFilesSimple": "{0}개 파일 삭제",
+  "msg.newFoldersSimple": "{0}개의 새 하위 폴더를 찾았습니다",
+  "msg.movedFilesSimple": "{0}개의 이동된 파일 업데이트",
+  "msg.folderRemoved": "폴더 \"{0}\"가 제거되었습니다: {1}개의 파일과 {2}개의 하위 폴더 정리됨",
+  "msg.refreshAllComplete": "새로고침 완료: {0}개의 존재하지 않는 파일 제거, {1}개의 존재하지 않는 폴더 정리",
+  "msg.refreshAllNoChange": "모든 폴더가 최신 상태입니다"
 }

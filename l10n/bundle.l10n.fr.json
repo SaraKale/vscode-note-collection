@@ -86,5 +86,16 @@
   "msg.tagNameIsReserved": "Le nom de l'étiquette est un nom réservé par le système, veuillez utiliser un autre nom",
   "msg.tagNameSanitized": "Le nom de l'étiquette \"{0}\" contient des caractères invalides et a été automatiquement nettoyé en \"{1}\". Voulez-vous utiliser le nom nettoyé ?",
   "msg.useSanitized": "Utiliser le nom nettoyé",
-  "msg.emptyFolder": "(Dossier vide)"
+  "msg.emptyFolder": "(Dossier vide)",
+  "msg.folderRefreshed Both": "Dossier \"{0}\" actualisé: {1} fichiers ajoutés, {2} fichiers supprimés",
+  "msg.folderRefreshedAdded": "Dossier \"{0}\" actualisé: {1} fichiers ajoutés",
+  "msg.folderRefreshedRemoved": "Dossier \"{0}\" actualisé: {2} fichiers supprimés",
+  "msg.folderRefreshed": "Dossier \"{0}\" actualisé: {1}",
+  "msg.addedFilesSimple": "{0} fichiers ajoutés",
+  "msg.removedFilesSimple": "{0} fichiers supprimés",
+  "msg.newFoldersSimple": "{0} nouveaux sous-dossiers trouvés",
+  "msg.movedFilesSimple": "{0} fichiers déplacés mis à jour",
+  "msg.folderRemoved": "Dossier \"{0}\" supprimé : nettoyés {1} fichiers et {2} sous-dossiers",
+  "msg.refreshAllComplete": "Actualisation terminée : {0} fichiers inexistants supprimés, {1} dossiers inexistants nettoyés",
+  "msg.refreshAllNoChange": "Tous les dossiers sont à jour"
 }
