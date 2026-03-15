@@ -29,10 +29,10 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 ## Video guide
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Installation
 
@@ -93,6 +93,9 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 		
 ![path-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/path-1.png)
 
+- If new files/folders are added in the file explorer, the interface will automatically refresh. If new files or folders do not appear, you can manually click the refresh button.
+- When moving or deleting files/folders, the interface will not refresh quickly. You need to manually click the refresh button to update.
+
 #### Managing Tags
 
 - Click "Add Tags..." in the "More" menu to create new tags/multi-level tags
@@ -108,6 +111,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 ![tag-3](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/tag-3.gif)
 
 #### Searching Notes
+
 - Click the search icon in the toolbar
 - Enter search keywords to find notes in all tags
 - Displays up to 50 matching results
@@ -116,6 +120,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 ![search-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/search-1.gif)
 
 #### Note Operations
+
 - **Open**: Double-click or select "Open File" from right-click menu
 - **Show in Explorer**: Open the location of the file in the explorer
 - **Rename Note**: Can change to a new name
@@ -133,7 +138,6 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 - **Import JSON Backup File**: Restore note collection state from a previously exported JSON backup file.
   - Note: Importing a JSON backup file will overwrite the current note collection state, please proceed with caution.
 
-
 ## Screenshots
 
 ![screen-1](https://raw.githubusercontent.com/sarakale/vscode-note-collection/main/image/screen-1.png)
@@ -146,6 +150,7 @@ A VS Code extension for managing and collecting tagged note files. Organize your
 
 1. After first installation, you may need to restart VS Code to switch languages.
 2. When collapsing/expanding tags, there might be UI refresh issues. Try manually expanding tags to resolve.
+3. If there are too many note items, VS Code may take a long time to load. I tested with 6000+ notes and it took 8 seconds to open. If notes don't appear, please wait patiently for them to load.
 
 ## Contributing
 
