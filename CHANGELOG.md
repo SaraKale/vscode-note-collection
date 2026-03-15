@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.7] - 2026-03-15
+
+- Increase note cache to enable faster note reading
+
 ## [1.0.6] - 2026-03-09
 
 - Add an automatic refresh function for files/folders, so that when files/folders are added in the file explorer, they will be automatically updated. Sometimes there may be a delay, but users can manually click the refresh button to update to the latest status.

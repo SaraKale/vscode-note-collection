@@ -29,10 +29,10 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 ## Videoanleitung
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Installation
 
@@ -93,6 +93,9 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 
 ![](../image/path-1.png)
 
+- Wenn neue Dateien/Ordner im Datei-Explorer hinzugefügt werden, wird die Benutzeroberfläche automatisch aktualisiert. Wenn neue Dateien oder Ordner nicht angezeigt werden, können Sie manuell auf die Aktualisieren-Schaltfläche klicken.
+- Beim Verschieben oder Löschen von Dateien/Ordnern wird die Benutzeroberfläche nicht schnell aktualisiert. Sie müssen manuell auf die Aktualisieren-Schaltfläche klicken, um zu aktualisieren.
+
 #### Tags verwalten
 
 - Klicken Sie im "Mehr"-Menü auf "Tags hinzufügen...", um neue Tags/mehrstufige Tags zu erstellen
@@ -108,6 +111,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 ![](../image/tag-3.gif)
 
 #### Notizen durchsuchen
+
 - Klicken Sie auf das Suchsymbol in der Symbolleiste
 - Geben Sie Suchbegriffe ein, um Notizen in allen Tags zu finden
 - Zeigt bis zu 50 übereinstimmende Ergebnisse an
@@ -116,6 +120,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 ![](../image/search-1.gif)
 
 #### Notizoperationen
+
 - **Öffnen** : Doppelklicken oder "Datei öffnen" aus dem Kontextmenü wählen
 - **Im Explorer anzeigen** : Den Speicherort der Datei im Explorer öffnen
 - **Notiz umbenennen** : Kann zu einem neuen Namen geändert werden
@@ -146,6 +151,7 @@ Eine VS Code-Erweiterung zur Verwaltung und Sammlung von getaggten Notizdateien.
 
 1. Nach der ersten Installation müssen Sie VS Code möglicherweise neu starten, um die Sprache zu wechseln.
 2. Beim Zusammenklappen/Ausklappen von Tags können UI-Aktualisierungsprobleme auftreten. Versuchen Sie, Tags manuell auszuklappen, um das Problem zu lösen.
+3. Wenn es zu viele Notizeinträge gibt, kann das Laden von VS Code lange dauern. Ich habe mit über 6000 Notizen getestet und es hat 8 Sekunden gedauert, um zu öffnen. Wenn Notizen nicht erscheinen, warten Sie bitte geduldig auf das Laden.
 
 ## Beitragen
 

@@ -29,10 +29,10 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 ## Video průvodce
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Instalace
 
@@ -93,6 +93,9 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 
 ![](../image/path-1.png)
 
+- Pokud jsou v průzkumníku souborů přidány nové soubory/složky, rozhraní se automaticky obnoví. Pokud se nové soubory nebo složky nezobrazí, můžete ručně kliknout na tlačítko obnovení.
+- Při přesouvání nebo odstraňování souborů/složek se rozhraní rychle neobnoví. Pro aktualizaci musíte ručně kliknout na tlačítko obnovení.
+
 #### Správa štítků
 
 - Kliknout "Přidat Štítky..." v menu "Více" pro vytvoření nových štítků/víceúrovňových štítků
@@ -108,6 +111,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 ![](../image/tag-3.gif)
 
 #### Hledání poznámek
+
 - Kliknout na ikonu hledání na panelu nástrojů
 - Zadat vyhledávací klíčová slova pro nalezení poznámek ve všech štítkách
 - Zobrazí až a 50 odpovídajících výsledků
@@ -116,6 +120,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 ![](../image/search-1.gif)
 
 #### Operace s poznámkami
+
 - **Otevřít** : Dvakrát kliknout nebo zvolit "Otevřít Soubor" z kontextového menu
 - **Zobrazit v Průzkumníkovi** : Otevřít umístění souboru v průzkumníkovi
 - **Přejmenovat poznámku** : Lze změnit na nový název
@@ -146,6 +151,7 @@ Rozšíření VS Code pro správu a sbírání označených souborů poznámek. 
 
 1. Po první instalaci může být nutné restartovat VS Code, aby se změnil jazyk.
 2. Při sbalování/rozbalování štítků se mohou objevit problémy s aktualizací uživatelského rozhraní. Zkuste ručně rozbalit štítky pro vyřešení.
+3. Pokud je příliš mnoho položek poznámek, načítání VS Code může trvat dlouho. Testoval jsem s více než 6000 poznámkami a otevření trvalo 8 sekund. Pokud se poznámky nezobrazí, prosím trpělivě čekejte na načtení.
 
 ## Přispěvat
 

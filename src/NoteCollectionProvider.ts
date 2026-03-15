@@ -49,6 +49,16 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
     private isAutoRefreshEnabled: boolean = true; // 是否启用自动刷新文件夹
     private refreshDebounceTimer: NodeJS.Timeout | undefined; // 刷新防抖定时器，用于延迟刷新树视图
 
+    // 文件存在性缓存：避免重复的同步 I/O 操作，显著提升大量笔记时的加载性能
+    private fileExistsCache: Map<string, { exists: boolean; timestamp: number }> = new Map();
+    private readonly FILE_CACHE_TTL = 30000; // 缓存有效期：30秒
+
+    // 懒加载：存储需要验证文件存在性的笔记路径，后台异步处理
+    private pendingValidationPaths: Set<string> = new Set();
+    private validationTimer: NodeJS.Timeout | undefined;
+    private readonly VALIDATION_BATCH_SIZE = 50; // 每批验证的文件数量
+    private readonly VALIDATION_DELAY = 100; // 批次之间的延迟（毫秒）
+
     // 拖放支持的数据类型
     dropMimeTypes = ['text/uri-list'];
     dragMimeTypes = [];
@@ -58,8 +68,14 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         this.globalState = globalState;
         this.loadData(); // 加载笔记数据
         this.loadCollapsedState(); // 加载折叠状态
-        this.loadAutoRefreshSetting(); // 加载自动刷新文件夹设置
-        this.setupAllFolderWatchers(); // 设置所有文件夹的文件系统监视器
+        
+        // 延迟初始化文件夹监视器和文件验证，避免阻塞 VSCode 启动
+        // 这样可以让树视图先渲染出来，提升用户体验
+        setTimeout(() => {
+            this.loadAutoRefreshSetting();
+            this.setupAllFolderWatchers();
+            this.startBackgroundValidation(); // 启动后台文件存在性验证
+        }, 500);
     }
 
     // 加载自动刷新文件夹设置
@@ -500,6 +516,102 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         if (this.refreshDebounceTimer) {
             clearTimeout(this.refreshDebounceTimer);
         }
+        if (this.validationTimer) {
+            clearTimeout(this.validationTimer);
+        }
+        this.fileExistsCache.clear();
+        this.pendingValidationPaths.clear();
+    }
+
+    // 带缓存的文件存在性检查：显著减少同步 I/O 操作次数
+    // 对于 1000+ 笔记，可将启动时的文件检查从 O(n) 次 I/O 降到 O(缓存命中)
+    private checkFileExistsCached(filePath: string): boolean {
+        const cached = this.fileExistsCache.get(filePath);
+        const now = Date.now();
+        
+        // 如果缓存存在且未过期，直接返回缓存结果
+        if (cached && (now - cached.timestamp) < this.FILE_CACHE_TTL) {
+            return cached.exists;
+        }
+        
+        // 缓存不存在或已过期，执行实际的文件检查并更新缓存
+        const exists = fs.existsSync(filePath);
+        this.fileExistsCache.set(filePath, { exists, timestamp: now });
+        
+        // 防止缓存无限增长：当缓存超过 2000 条目时清理最旧的一半
+        if (this.fileExistsCache.size > 2000) {
+            const entries = Array.from(this.fileExistsCache.entries());
+            entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+            const toDelete = entries.slice(0, Math.floor(entries.length / 2));
+            toDelete.forEach(([key]) => this.fileExistsCache.delete(key));
+        }
+        
+        return exists;
+    }
+
+    // 清除文件存在性缓存（在文件被删除或移动后调用）
+    clearFileExistsCache(filePath?: string): void {
+        if (filePath) {
+            this.fileExistsCache.delete(filePath);
+        } else {
+            this.fileExistsCache.clear();
+        }
+    }
+
+    // 启动后台文件存在性验证（懒加载核心方法）
+    // 分批异步验证，避免阻塞主线程，让树视图先快速显示
+    private startBackgroundValidation(): void {
+        // 收集所有需要验证的文件路径
+        this.noteList.forEach(note => {
+            if (note.rootPath && !this.fileExistsCache.has(note.rootPath)) {
+                this.pendingValidationPaths.add(note.rootPath);
+            }
+        });
+        
+        if (this.pendingValidationPaths.size > 0) {
+            this.processValidationBatch();
+        }
+    }
+
+    // 分批处理文件验证，每批处理 VALIDATION_BATCH_SIZE 个文件
+    private processValidationBatch(): void {
+        if (this.pendingValidationPaths.size === 0) {
+            return;
+        }
+        
+        // 取出一批待验证的路径
+        const batch: string[] = [];
+        const iterator = this.pendingValidationPaths.values();
+        for (let i = 0; i < this.VALIDATION_BATCH_SIZE && this.pendingValidationPaths.size > 0; i++) {
+            const path = iterator.next().value;
+            if (path) {
+                batch.push(path);
+                this.pendingValidationPaths.delete(path);
+            }
+        }
+        
+        // 验证这批文件
+        let hasChanges = false;
+        for (const filePath of batch) {
+            const exists = fs.existsSync(filePath);
+            this.fileExistsCache.set(filePath, { exists, timestamp: Date.now() });
+            if (!exists) {
+                hasChanges = true; // 有文件不存在，需要更新 UI
+            }
+        }
+        
+        // 如果有文件不存在，刷新树视图以更新图标
+        if (hasChanges) {
+            this.treeVersion++; // 强制刷新
+            this._onDidChangeTreeData.fire();
+        }
+        
+        // 如果还有待验证的文件，延迟后继续处理下一批
+        if (this.pendingValidationPaths.size > 0) {
+            this.validationTimer = setTimeout(() => {
+                this.processValidationBatch();
+            }, this.VALIDATION_DELAY);
+        }
     }
 
     getNoteList(): NoteList {
@@ -709,13 +821,23 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         return rootTags;
     }
 
-    // 创建文件树项
+    // 创建文件树项（懒加载：启动时不检查文件存在性，后台异步验证）
     private createFileTreeItem(note: NoteItem): TreeNoteItem {
         // 确定显示名称：如果有 name 则使用 name，否则使用第一个标签名称
         const displayName = note.name || (note.tags && note.tags.length > 0 ? note.tags[0] : Localize.localize('msg.untitled')); // 未命名
         
-        // 检查文件是否存在
-        const fileExists = note.rootPath && fs.existsSync(note.rootPath);
+        // 懒加载：先检查缓存，如果没有缓存则假设文件存在（快速启动）
+        // 后台会异步验证文件存在性并更新 UI
+        let fileExists = true; // 默认假设存在，快速创建 TreeItem
+        if (note.rootPath) {
+            const cached = this.fileExistsCache.get(note.rootPath);
+            if (cached) {
+                fileExists = cached.exists;
+            } else {
+                // 添加到待验证队列，后台处理
+                this.pendingValidationPaths.add(note.rootPath);
+            }
+        }
         
         const treeItem = new TreeNoteItem(
             displayName,
@@ -742,8 +864,7 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         } else {
             // 文件不存在，显示明显的错误样式
             treeItem.contextValue = 'file-missing';
-            // treeItem.iconPath = new vscode.ThemeIcon('error'); // 调用VScode的错误图标
-            treeItem.iconPath = vscode.Uri.joinPath(vscode.Uri.file(path.join(__dirname, '..')), 'media', 'Warning.svg'); // 指定警告图标
+            treeItem.iconPath = vscode.Uri.joinPath(vscode.Uri.file(path.join(__dirname, '..')), 'media', 'Warning.svg');
             treeItem.description = Localize.localize('msg.fileMissing'); // 文件不存在
             treeItem.tooltip = Localize.localize('msg.fileMovedOrDeleted', displayName); // 文件已被移动或删除
         }

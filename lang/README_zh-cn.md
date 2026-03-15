@@ -29,10 +29,10 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
 ## 视频指南
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## 安装
 
@@ -92,6 +92,9 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
         ```
 ![](../image/path-1.png)
 
+- 如果文件/文件夹在资源管理器中有新增文件/文件夹，也会在界面中自动刷新，如果没有出现新文件和新文件夹，可以手动点击刷新按钮。
+- 当移动或删除文件/文件夹时，界面不会快速刷新，需要手动点击刷新按钮进行更新。
+
 #### 管理标签
 
 - 在"更多"菜单中点击"添加标签..."创建新标签/多级标签
@@ -107,6 +110,7 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/tag-3.gif)
 
 #### 搜索笔记
+
 - 点击工具栏的搜索图标
 - 输入搜索关键词，在所有标签中查找笔记
 - 最多显示前 50 条匹配结果
@@ -115,6 +119,7 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/search-1.gif)
 
 #### 笔记操作
+
 - **打开**：双击或从右键菜单选择 "打开文件"
 - **在资源管理器中打开**：打开资源管理中文件的位置
 - **重命名笔记**：可以更改新的名称
@@ -132,7 +137,6 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
 - **导入 JSON 备份文件**：从之前导出的 JSON 备份文件恢复笔记集合状态。
   - 注：导入 JSON 备份文件将覆盖当前笔记集合状态，请谨慎操作。
 
-
 ## 截图
 
 ![](../image/screen-1.png)
@@ -145,6 +149,7 @@ language: [English](../README.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. 首次安装后，可能需要重启 VSCode 才能更换语言。
 2. 折叠/展开标签时，可能会出现 UI 刷新问题。请尝试手动展开标签以解决。
+3. 如果笔记项目太多，VScode加载可能会很长时间，我这里测试6000+笔记打开是8秒，如果发现笔记没出现可以耐心等待它加载。
 
 ## 贡献
 

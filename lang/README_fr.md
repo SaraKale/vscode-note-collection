@@ -29,10 +29,10 @@ Une extension VS Code pour gérer et collecter des fichiers de notes étiquetés
 ## Guide vidéo
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Installation
 
@@ -93,6 +93,9 @@ Une extension VS Code pour gérer et collecter des fichiers de notes étiquetés
 		
 ![](../image/path-1.png)
 
+- Si de nouveaux fichiers/dossiers sont ajoutés dans l'explorateur de fichiers, l'interface se rafraîchira automatiquement. Si les nouveaux fichiers ou dossiers n'apparaissent pas, vous pouvez cliquer manuellement sur le bouton de rafraîchissement.
+- Lors du déplacement ou de la suppression de fichiers/dossiers, l'interface ne se rafraîchira pas rapidement. Vous devez cliquer manuellement sur le bouton de rafraîchissement pour mettre à jour.
+
 #### Gérer les étiquettes
 
 - Cliquer sur "Ajouter des étiquettes..." dans le menu "Plus" pour créer de nouvelles étiquettes/étiquettes multiniveaux
@@ -108,6 +111,7 @@ Une extension VS Code pour gérer et collecter des fichiers de notes étiquetés
 ![](../image/tag-3.gif)
 
 #### Rechercher des notes
+
 - Cliquer sur l'icône de recherche dans la barre d'outils
 - Saisir des mots-clés de recherche pour trouver des notes dans toutes les étiquettes
 - Affiche jusqu'à 50 résultats correspondants
@@ -116,6 +120,7 @@ Une extension VS Code pour gérer et collecter des fichiers de notes étiquetés
 ![](../image/search-1.gif)
 
 #### Opérations sur les notes
+
 - **Ouvrir** : Double-cliquer ou sélectionner "Ouvrir le fichier" depuis le menu clic droit
 - **Afficher dans l'explorateur** : Ouvrir l'emplacement du fichier dans l'explorateur
 - **Renommer la note** : Peut changer vers un nouveau nom
@@ -146,6 +151,7 @@ Une extension VS Code pour gérer et collecter des fichiers de notes étiquetés
 
 1. Après la première installation, il peut être nécessaire de redémarrer VS Code pour changer de langue.
 2. Lors du développement/réduction des étiquettes, il peut y avoir des problèmes de rafraîchissement de l'interface. Essayez de développer manuellement les étiquettes pour résoudre.
+3. S'il y a trop d'éléments de notes, le chargement de VS Code peut prendre beaucoup de temps. J'ai testé avec plus de 6000 notes et cela a pris 8 secondes pour s'ouvrir. Si les notes n'apparaissent pas, veuillez attendre patiemment leur chargement.
 
 ## Contribution
 

@@ -29,10 +29,10 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ## ビデオガイド
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+ -[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## インストール
 
@@ -93,6 +93,9 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 		
 ![](../image/path-1.png)
 
+- ファイルエクスプローラーで新しいファイル/フォルダが追加されると、インターフェースも自動的に更新されます。新しいファイルやフォルダが表示されない場合は、手動で更新ボタンをクリックしてください。
+- ファイル/フォルダを移動または削除する場合、インターフェースはすぐには更新されません。更新するには手動で更新ボタンをクリックする必要があります。
+
 #### タグの管理
 
 - "その他"メニューで"タグを追加..."をクリックして新しいタグ/マルチレベルタグを作成
@@ -108,6 +111,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/tag-3.gif)
 
 #### ノートの検索
+
 - ツールバーの検索アイコンをクリック
 - 検索キーワードを入力してすべてのタグでノートを検索
 - 最大50件の一致結果を表示
@@ -116,6 +120,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/search-1.gif)
 
 #### ノート操作
+
 - **開く** : ダブルクリックまたは右クリックメニューから「ファイルを開く」を選択
 - **エクスプローラーで表示** : エクスプローラー内のファイルの場所を開く
 - **ノートの名前変更** : 新しい名前に変更できます
@@ -133,7 +138,6 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 - **JSON バックアップファイルをインポート** : 以前にエクスポートされた JSON バックアップファイルからノートコレクションの状態を復元。
   - 注：JSON バックアップファイルをインポートすると現在のノートコレクションの状態が上書きされるため、注意してください。
 
-
 ## スクリーンショット
 
 ![](../image/screen-1.png)
@@ -146,6 +150,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. 最初のインストール後、言語を切り替えるために VS Code を再起動する必要がある場合があります。
 2. タグを折りたたむ/展開する際に UI の更新の問題が発生する場合があります。手動でタグを展開して解決してください。
+3. ノート項目が多すぎる場合、VS Codeの読み込みに時間がかかることがあります。6000以上のノートでテストしたところ、開くのに8秒かかりました。ノートが表示されない場合は、読み込みを待ってください。
 
 ## 貢献
 

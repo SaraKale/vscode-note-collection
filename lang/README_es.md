@@ -29,10 +29,10 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 ## Guía de video
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Instalación
 
@@ -93,6 +93,9 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 
 ![](../image/path-1.png)
 
+- Si se agregan nuevos archivos/carpetas en el explorador de archivos, la interfaz se actualizará automáticamente. Si los nuevos archivos o carpetas no aparecen, puede hacer clic manualmente en el botón de actualización.
+- Al mover o eliminar archivos/carpetas, la interfaz no se actualizará rápidamente. Debe hacer clic manualmente en el botón de actualización para actualizar.
+
 #### Gestionar etiquetas
 
 - Haga clic en "Añadir etiquetas..." en el menú "Más" para crear nuevas etiquetas/etiquetas multinivel
@@ -108,6 +111,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 ![](../image/tag-3.gif)
 
 #### Buscar notas
+
 - Haga clic en el icono de búsqueda en la barra de herramientas
 - Ingrese palabras clave de búsqueda para encontrar notas en todas las etiquetas
 - Muestra hasta a 50 resultados coincidentes
@@ -116,6 +120,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 ![](../image/search-1.gif)
 
 #### Operaciones de notas
+
 - **Abrir** : Haga doble clic o seleccione "Abrir archivo" desde el menú contextual
 - **Mostrar en el explorador** : Abrir la ubicación del archivo en el explorador
 - **Renombrar nota** : Puede cambiar a un nuevo nombre
@@ -146,6 +151,7 @@ Una extensión de VS Code para administrar y recopilar archivos de notas etiquet
 
 1. Después de la primera instalación, es posible que deba reiniciar VS Code para cambiar el idioma.
 2. Al colapsar/expandir etiquetas, pueden aparecer problemas de actualización de la interfaz. Intente expandir manualmente las etiquetas para resolver.
+3. Si hay demasiados elementos de notas, VS Code puede tardar mucho tiempo en cargar. Probé con más de 6000 notas y tardó 8 segundos en abrirse. Si las notas no aparecen, espere pacientemente a que se carguen.
 
 ## Contribuir
 

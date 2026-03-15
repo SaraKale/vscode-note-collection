@@ -29,10 +29,10 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ## Видеогид
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Установка
 
@@ -93,6 +93,9 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 		
 ![](../image/path-1.png)
 
+- Если новые файлы/папки добавлены в проводнике файлов, интерфейс автоматически обновится. Если новые файлы или папки не появляются, вы можете вручную нажать кнопку обновления.
+- При перемещении или удалении файлов/папок интерфейс не будет быстро обновляться. Вам нужно вручную нажать кнопку обновления для обновления.
+
 #### Управление тегами
 
 - Нажмите "Добавить теги..." в меню "Ещё", чтобы создать новые теги/многоуровневые теги
@@ -108,6 +111,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/tag-3.gif)
 
 #### Поиск заметок
+
 - Нажмите на значок поиска на панели инструментов
 - Введите ключевые слова поиска, чтобы найти заметки во всех тегах
 - Отображается до 50 совпадающих результатов
@@ -116,6 +120,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/search-1.gif)
 
 #### Операции с заметками
+
 - **Открыть** : Дважды щелкнуть или выбрать "Открыть файл" из контекстного меню
 - **Показать в проводнике** : Открыть расположение файла в проводнике
 - **Переименовать заметку** : Можно изменить на новое имя
@@ -146,6 +151,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. После первой установки вам может потребоваться перезапустить VS Code, чтобы сменить язык.
 2. При сворачивании/разворачивании тегов могут возникнуть проблемы обновления пользовательского интерфейса. Попробуйте вручную развернуть теги для решения.
+3. Если слишком много элементов заметок, загрузка VS Code может занять много времени. Я тестировал с более чем 6000 заметок, и открытие заняло 8 секунд. Если заметки не появляются, пожалуйста, подождите их загрузки.
 
 ## Участие
 

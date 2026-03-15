@@ -29,10 +29,10 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 ## Video rehberi
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Kurulum
 
@@ -93,6 +93,9 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 		
 ![](../image/path-1.png)
 
+- Dosya gezgininde yeni dosyalar/klasörler eklenirse, arayüz otomatik olarak yenilenir. Yeni dosyalar veya klasörler görünmezse, manuel olarak yenile düğmesine tıklayabilirsiniz.
+- Dosyaları/klasörleri taşıdığınızda veya sildiğinizde, arayüz hızlı bir şekilde yenilenmez. Güncellemek için manuel olarak yenile düğmesine tıklamanız gerekir.
+
 #### Etiketleri yönetme
 
 - "Daha fazla" menüsünde "Etiket Ekle..." tıklayarak yeni etiketler/çok seviyeli etiketler oluştur
@@ -108,6 +111,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 ![](../image/tag-3.gif)
 
 #### Notları ara
+
 - Araç çubuğundaki arama simgesine tıkla
 - Tüm etiketlerde not bulmak için arama anahtar kelimelerini gir
 - 50 eşleşen sonuca kadar gösterir
@@ -116,6 +120,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 ![](../image/search-1.gif)
 
 #### Not İşlemleri
+
 - **Aç** : Çift tıkla veya bağlam menüsünden "Dosyayı Aç" seç
 - **Gezginde Göster** : Dosyanın konumunu gezgini aç
 - **Notu Yeniden Adlandır** : Yeni bir isme değiştirilebilir
@@ -146,6 +151,7 @@ Etiketlenmiş not dosyalarını yönetmek ve toplamak için bir VS Code uzantıs
 
 1. İlk yükleme sonrası, dili değiştirmek için VS Code'u yeniden başlatmanız gerekebilir.
 2. Etiketleri daraltırken/genişletirken, arayüz yenileme sorunları ortaya çıkabilir. Çözmek için etiketleri manuel olarak genişletmeyi deneyin.
+3. Çok fazla not öğesi varsa, VS Code'un yüklenmesi uzun sürebilir. 6000'den fazla notla test ettim ve açılması 8 saniye sürdü. Notlar görünmezse, yüklenmesini sabırla bekleyin.
 
 ## Katkıda Bulunma
 

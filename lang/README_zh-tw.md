@@ -29,10 +29,10 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ## 影片指南
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## 安裝
 
@@ -92,6 +92,9 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
         ```
 ![](../image/path-1.png)
 
+- 如果檔案/資料夾在資源管理器中有新增檔案/資料夾，也會在介面中自動重新整理，如果沒有出現新檔案和新資料夾，可以手動點擊重新整理按鈕。
+- 當移動或刪除檔案/資料夾時，介面不會快速重新整理，需要手動點擊重新整理按鈕進行更新。
+
 #### 管理標籤
 
 - 在"更多"選單中點擊"新增標籤..."建立新標籤/多級標籤
@@ -107,6 +110,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/tag-3.gif)
 
 #### 搜尋筆記
+
 - 點擊工具列的搜尋圖示
 - 輸入搜尋關鍵字，在所有標籤中查找筆記
 - 最多顯示前 50 條匹配結果
@@ -115,6 +119,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/search-1.gif)
 
 #### 筆記操作
+
 - **開啟**：雙擊或從右鍵選單選擇 "開啟檔案"
 - **在總管中開啟**：開啟總管中檔案的位置
 - **重新命名筆記**：可以更改新的名稱
@@ -132,7 +137,6 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 - **匯入 JSON 備份檔案**：從先前匯出的 JSON 備份檔案恢復筆記集合狀態。
   - 註：匯入 JSON 備份檔案將覆蓋目前筆記集合狀態，請謹慎操作。
 
-
 ## 截圖
 
 ![](../image/screen-1.png)
@@ -145,6 +149,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. 首次安裝後，可能需要重新啟動 VSCode 才能切換語言。
 2. 折疊/展開標籤時，可能會出現 UI 重新整理問題。請嘗試手動展開標籤來解決。
+3. 如果筆記項目太多，VScode載入可能會很長時間，我這裡測試6000+筆記開啟是8秒，如果發現筆記沒出現可以耐心等待它載入。
 
 ## 貢獻
 

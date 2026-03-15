@@ -29,10 +29,10 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 ## Wideo przewodnik
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Instalacja
 
@@ -93,6 +93,9 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 
 ![](../image/path-1.png)
 
+- Jeśli nowe pliki/foldery zostaną dodane w eksploratorze plików, interfejs automatycznie się odświeży. Jeśli nowe pliki lub foldery się nie pojawią, możesz ręcznie kliknąć przycisk odświeżania.
+- Podczas przenoszenia lub usuwania plików/folderów interfejs nie odświeży się szybko. Musisz ręcznie kliknąć przycisk odświeżania, aby zaktualizować.
+
 #### Zarządzanie tagami
 
 - Kliknij "Dodaj Tagi..." w menu "Więcej", aby utworzyć nowe tagi/tagi wielopoziomowe
@@ -108,6 +111,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 ![](../image/tag-3.gif)
 
 #### Wyszukiwanie notatek
+
 - Kliknij ikonę wyszukiwania na pasku narzędzi
 - Wprowadź słowa kluczowe wyszukiwania, aby znaleźć notatki we wszystkich tagach
 - Pokazuje do 50 pasujących wyników
@@ -116,6 +120,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 ![](../image/search-1.gif)
 
 #### Operacje na notatkach
+
 - **Otwórz** : Kliknij dwukrotnie lub wybierz "Otwórz Plik" z menu kontekstowego
 - **Pokaż w Eksploratorze** : Otwórz lokalizację pliku w eksploratorze
 - **Zmień nazwę notatki** : Można zmienić na nową nazwę
@@ -146,6 +151,7 @@ Rozszerzenie VS Code do zarządzania i zbierania oznaczonych plików notatek. Ef
 
 1. Po pierwszej instalacji może być konieczne ponowne uruchomienie VS Code, aby zmienić język.
 2. Przy zwijaniu/rozwijaniu tagów mogą wystąpić problemy z odświeżaniem interfejsu. Spróbuj ręcznie rozwinąć tagi, aby rozwiązać.
+3. Jeśli jest zbyt wiele elementów notatek, ładowanie VS Code może zająć dużo czasu. Testowałem z ponad 6000 notatek i otwarcie zajęło 8 sekund. Jeśli notatki się nie pojawiają, proszę cierpliwie czekać na załadowanie.
 
 ## Współpraca
 

@@ -29,10 +29,10 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 ## Guida video
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## Installazione
 
@@ -93,6 +93,9 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 		
 ![](../image/path-1.png)
 
+- Se nuovi file/cartelle vengono aggiunti nel file explorer, l'interfaccia si aggiornerà automaticamente. Se i nuovi file o cartelle non appaiono, puoi cliccare manualmente il pulsante di aggiornamento.
+- Quando si spostano o eliminano file/cartelle, l'interfaccia non si aggiornerà rapidamente. È necessario cliccare manualmente il pulsante di aggiornamento per aggiornare.
+
 #### Gestire tag
 
 - Clicca "Aggiungi Tag..." nel menu "Altro" per creare nuovi tag/tag multilivello
@@ -108,6 +111,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 ![](../image/tag-3.gif)
 
 #### Cercare note
+
 - Clicca sull'icona di ricerca nella barra degli strumenti
 - Inserisci parole chiave di ricerca per trovare note in tutti i tag
 - Mostra fino a 50 risultati corrispondenti
@@ -116,6 +120,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 ![](../image/search-1.gif)
 
 #### Operazioni sulle note
+
 - **Apri** : Doppio clic o seleziona "Apri File" dal menu contestuale
 - **Mostra nel Explorer** : Apri la posizione del file nell'explorer
 - **Rinomina nota** : Può cambiare in un nuovo nome
@@ -146,6 +151,7 @@ Un'estensione VS Code per gestire e raccogliere file di note etichettati. Organi
 
 1. Dopo la prima installazione, potrebbe essere necessario riavviare VS Code per cambiare lingua.
 2. Quando si comprimono/espandono i tag, possono presentarsi problemi di aggiornamento dell'interfaccia. Provare ad espandere manualmente i tag per risolvere.
+3. Se ci sono troppe voci di note, il caricamento di VS Code potrebbe richiedere molto tempo. Ho testato con oltre 6000 note e ci sono voluti 8 secondi per aprirle. Se le note non appaiono, attendere pazientemente il caricamento.
 
 ## Contributi
 

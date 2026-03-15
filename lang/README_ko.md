@@ -29,10 +29,10 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ## 비디오 가이드
 
 - [youtube](https://www.youtube.com/watch?v=uH8zRXyZyVA)
-[![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
+- [![Note Collection](https://img.youtube.com/vi/uH8zRXyZyVA/0.jpg)](https://www.youtube.com/watch?v=uH8zRXyZyVA)
 
 - [bilibili](https://www.bilibili.com/video/BV1TkPMzhEF2/)
-[![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
+- [![Note Collection](https://i0.hdslb.com/bfs/archive/ec21db0cb688bfc6bb55a56ca90b7c6cac27cf3d.jpg@672w_378h_1c.avif)](https://www.bilibili.com/video/BV1TkPMzhEF2/)
 
 ## 설치
 
@@ -93,6 +93,9 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 		
 ![](../image/path-1.png)
 
+- 파일 탐색기에서 새 파일/폴더가 추가되면 인터페이스가 자동으로 새로고침됩니다. 새 파일이나 폴더가 나타나지 않으면 수동으로 새로고침 버튼을 클릭할 수 있습니다.
+- 파일/폴더를 이동하거나 삭제할 때 인터페이스가 빠르게 새로고침되지 않습니다. 업데이트하려면 수동으로 새로고침 버튼을 클릭해야 합니다.
+
 #### 태그 관리
 
 - "더보기" 메뉴에서 "태그 추가..."를 클릭하여 새 태그/다단계 태그 생성
@@ -108,6 +111,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/tag-3.gif)
 
 #### 노트 검색
+
 - 도구 모음의 검색 아이콘을 클릭
 - 검색 키워드를 입력하여 모든 태그에서 노트 찾기
 - 최대 50개의 일치하는 결과 표시
@@ -116,6 +120,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 ![](../image/search-1.gif)
 
 #### 노트 작업
+
 - **열기** : 더블 클릭하거나 오른쪽 클릭 메뉴에서 "파일 열기" 선택
 - **탐색기에서 표시** : 탐색기에서 파일의 위치 열기
 - **노트 이름 변경** : 새 이름으로 변경 가능
@@ -146,6 +151,7 @@ language: [English](README_en.md) | [简体中文](README_zh-cn.md) | [繁體中
 
 1. 처음 설치 후 언어를 변경하려면 VS Code를 다시 시작해야 할 수 있습니다.
 2. 태그를 접기/펼칠 때 UI 새로고침 문제가 발생할 수 있습니다. 수동으로 태그를 펼쳐 해결하세요.
+3. 노트 항목이 너무 많으면 VS Code 로딩에 오랜 시간이 걸릴 수 있습니다. 6000개 이상의 노트로 테스트했을 때 열리는 데 8초가 걸렸습니다. 노트가 나타나지 않으면 로딩을 기다려 주세요.
 
 ## 기여
 
