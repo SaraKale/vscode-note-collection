@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "{0} arquivos movidos atualizados",
   "msg.folderRemoved": "Pasta \"{0}\" removida: limpos {1} arquivos e {2} subpastas",
   "msg.refreshAllComplete": "Atualização concluída: removidos {0} arquivos inexistentes, limpas {1} pastas inexistentes",
-  "msg.refreshAllNoChange": "Todas as pastas estão atualizadas"
+  "refreshAllNoChange": "Todas as pastas estão atualizadas",
+  "msg.addEditorTabToTag": "Adicionar à tag...",
+  "msg.noTagsAvailable": "Nenhuma tag disponível, por favor crie uma tag primeiro",
+  "msg.fileAddedToTag": "O arquivo \"{0}\" foi adicionado à tag \"{1}\"",
+  "msg.fileAlreadyInTag": "O arquivo \"{0}\" já está na tag \"{1}\""
 }

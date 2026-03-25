@@ -422,6 +422,35 @@ export function activate(context: vscode.ExtensionContext) {
         })
     );
     
+    // 添加当前编辑器标签页到选中的标签
+    context.subscriptions.push(
+        vscode.commands.registerCommand('noteCollection.addEditorTabToTag', async () => {
+            let filePath: string | undefined;
+            
+            // 获取当前活动的标签页
+            const activeTab = vscode.window.tabGroups.activeTabGroup.activeTab;
+            
+            if (activeTab && 'input' in activeTab) {
+                const tabInput = (activeTab as any).input;
+                if (tabInput instanceof vscode.TabInputText) {
+                    filePath = tabInput.uri.fsPath;
+                } else if (tabInput instanceof vscode.TabInputTextDiff) {
+                    filePath = tabInput.original.fsPath;
+                } else if (tabInput instanceof vscode.TabInputNotebook) {
+                    filePath = tabInput.uri.fsPath;
+                } else if (tabInput instanceof vscode.TabInputCustom) {
+                    filePath = tabInput.uri.fsPath;
+                }
+            }
+            
+            if (filePath && fs.existsSync(filePath)) {
+                await treeDataProvider.addFileToTag(filePath);
+            } else {
+                vscode.window.showWarningMessage(Localize.localize('msg.fileMovedOrDeleted', Localize.localize('msg.untitled')));
+            }
+        })
+    );
+    
     context.subscriptions.push({
         dispose: () => treeDataProvider.dispose()
     });

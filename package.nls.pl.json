@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "Importuj z tekstu...",
   "noteCollection.deleteItems.title": "Usuń wybrane notatki",
   "noteCollection.refreshFolder.title": "Odśwież folder",
+  "noteCollection.addEditorTabToTag.title": "Dodaj do tagu...",
   "configuration.title": "Kolekcja notatek",
   "noteCollection.autoRefreshFolders.description": "Automatycznie odświeżaj zawartość folderu po dodaniu lub usunięciu plików"
 }

@@ -2,7 +2,7 @@
   "name": "note-collection",
   "displayName": "%displayName%",
   "description": "%description%",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "publisher": "SaraKale",
   "engines": {
     "vscode": "^1.80.0"
@@ -169,6 +169,10 @@
       {
         "command": "noteCollection.refreshFolder",
         "title": "%noteCollection.refreshFolder.title%"
+      },
+      {
+        "command": "noteCollection.addEditorTabToTag",
+        "title": "%noteCollection.addEditorTabToTag.title%"
       }
     ],
     "menus": {
@@ -276,6 +280,13 @@
           "command": "noteCollection.refreshFolder",
           "when": "view == noteCollection.list && viewItem == folder",
           "group": "1_actions"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "noteCollection.addEditorTabToTag",
+          "when": "editorIsOpen",
+          "group": "3_noteCollection@1"
         }
       ]
     },

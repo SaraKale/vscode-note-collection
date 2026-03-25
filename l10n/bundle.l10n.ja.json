@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "{0}個の移動されたファイルを更新",
   "msg.folderRemoved": "フォルダ \"{0}\" が削除されました：{1}個のファイルと{2}個のサブフォルダをクリアしました",
   "msg.refreshAllComplete": "更新完了：{0}個の存在しないファイルを削除し、{1}個の存在しないフォルダをクリアしました",
-  "msg.refreshAllNoChange": "すべてのフォルダが最新の状態です"
+  "msg.refreshAllNoChange": "すべてのフォルダが最新の状態",
+  "msg.addEditorTabToTag": "タグに追加...",
+  "msg.noTagsAvailable": "利用可能なタグがありません。先にタグを作成してください",
+  "msg.fileAddedToTag": "ファイル \"{0}\" がタグ \"{1}\" に追加されました",
+  "msg.fileAlreadyInTag": "ファイル \"{0}\" は既にタグ \"{1}\" に存在します"
 }

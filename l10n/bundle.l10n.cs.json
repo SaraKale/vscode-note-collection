@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "Aktualizováno {0} přesunutých souborů",
   "msg.folderRemoved": "Složka \"{0}\" odstraněna: vyčištěno {1} souborů a {2} podsložek",
   "msg.refreshAllComplete": "Obnovení dokončeno: odstraněno {0} neexistujících souborů, vyčištěno {1} neexistujících složek",
-  "msg.refreshAllNoChange": "Všechny složky jsou aktuální"
+  "refreshAllNoChange": "Všechny složky jsou aktuální",
+  "msg.addEditorTabToTag": "Přidat ke štítku...",
+  "msg.noTagsAvailable": "Žádné dostupné štítky, prosím nejprve vytvořte štítek",
+  "msg.fileAddedToTag": "Soubor \"{0}\" byl přidán ke štítku \"{1}\"",
+  "msg.fileAlreadyInTag": "Soubor \"{0}\" je již ve štítku \"{1}\""
 }

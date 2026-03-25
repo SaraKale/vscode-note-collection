@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "手动输入地址...",
   "noteCollection.deleteItems.title": "删除选中的笔记",
   "noteCollection.refreshFolder.title": "刷新文件夹",
+  "noteCollection.addEditorTabToTag.title": "添加到标签...",
   "configuration.title": "笔记收藏集",
   "noteCollection.autoRefreshFolders.description": "当文件夹中添加或删除文件时自动刷新文件夹内容"
 }

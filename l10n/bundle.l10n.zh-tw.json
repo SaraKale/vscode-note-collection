@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "更新 {0} 個移動的文件",
   "msg.folderRemoved": "資料夾 \"{0}\" 已移除：清理了 {1} 個文件和 {2} 個子資料夾",
   "msg.refreshAllComplete": "重新整理完成：移除了 {0} 個不存在的文件，清理了 {1} 個不存在的資料夾",
-  "msg.refreshAllNoChange": "所有資料夾已是最新狀態"
+  "msg.refreshAllNoChange": "所有資料夾已是最新狀態",
+  "msg.addEditorTabToTag": "新增到標籤...",
+  "msg.noTagsAvailable": "沒有可用的標籤，請先建立標籤",
+  "msg.fileAddedToTag": "文件 \"{0}\" 已新增到標籤 \"{1}\"",
+  "msg.fileAlreadyInTag": "文件 \"{0}\" 已在標籤 \"{1}\" 中"
 }

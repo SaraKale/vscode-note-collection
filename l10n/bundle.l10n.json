@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "Updated {0} moved files",
   "msg.folderRemoved": "Folder \"{0}\" removed: cleaned {1} files and {2} subfolders",
   "msg.refreshAllComplete": "Refresh complete: removed {0} non-existent files, cleaned {1} non-existent folders",
-  "msg.refreshAllNoChange": "All folders are up to date"
+  "msg.refreshAllNoChange": "All folders are up to date",
+  "msg.addEditorTabToTag": "Add to Tag...",
+  "msg.noTagsAvailable": "No tags available, please create a tag first",
+  "msg.fileAddedToTag": "File \"{0}\" has been added to tag \"{1}\"",
+  "msg.fileAlreadyInTag": "File \"{0}\" is already in tag \"{1}\""
 }

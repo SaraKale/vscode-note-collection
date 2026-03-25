@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "Aggiornati {0} file spostati",
   "msg.folderRemoved": "Cartella \"{0}\" rimossa: puliti {1} file e {2} sottocartelle",
   "msg.refreshAllComplete": "Aggiornamento completo: rimossi {0} file inesistenti, pulite {1} cartelle inesistenti",
-  "msg.refreshAllNoChange": "Tutte le cartelle sono aggiornate"
+  "refreshAllNoChange": "Tutte le cartelle sono aggiornate",
+  "msg.addEditorTabToTag": "Aggiungi a etichetta...",
+  "msg.noTagsAvailable": "Nessuna etichetta disponibile, per favore crea prima un'etichetta",
+  "msg.fileAddedToTag": "Il file \"{0}\" è stato aggiunto all'etichetta \"{1}\"",
+  "msg.fileAlreadyInTag": "Il file \"{0}\" è già nell'etichetta \"{1}\""
 }

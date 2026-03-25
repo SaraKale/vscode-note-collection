@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "Import from Text...",
   "noteCollection.deleteItems.title": "Delete Selected Notes",
   "noteCollection.refreshFolder.title": "Refresh Folder",
+  "noteCollection.addEditorTabToTag.title": "Add to Tag...",
   "configuration.title": "Note Collection",
   "noteCollection.autoRefreshFolders.description": "Automatically refresh folder contents when files are added or removed"
 }

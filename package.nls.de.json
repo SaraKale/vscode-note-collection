@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "Aus Text importieren...",
   "noteCollection.deleteItems.title": "Ausgewählte Notizen löschen",
   "noteCollection.refreshFolder.title": "Ordner aktualisieren",
+  "noteCollection.addEditorTabToTag.title": "Zu Tag hinzufügen...",
   "configuration.title": "Notizsammlung",
   "noteCollection.autoRefreshFolders.description": "Ordnerinhalt automatisch aktualisieren, wenn Dateien hinzugefügt oder entfernt werden"
 }

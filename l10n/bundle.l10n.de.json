@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "{0} verschobene Dateien aktualisiert",
   "msg.folderRemoved": "Ordner \"{0}\" entfernt: {1} Dateien und {2} Unterordner bereinigt",
   "msg.refreshAllComplete": "Aktualisierung abgeschlossen: {0} nicht existierende Dateien entfernt, {1} nicht existierende Ordner bereinigt",
-  "msg.refreshAllNoChange": "Alle Ordner sind auf dem neuesten Stand"
+  "refreshAllNoChange": "Alle Ordner sind auf dem neuesten Stand",
+  "msg.addEditorTabToTag": "Zu Tag hinzufügen...",
+  "msg.noTagsAvailable": "Keine Tags verfügbar, bitte erstellen Sie zuerst einen Tag",
+  "msg.fileAddedToTag": "Datei \"{0}\" wurde zum Tag \"{1}\" hinzugefügt",
+  "msg.fileAlreadyInTag": "Datei \"{0}\" ist bereits im Tag \"{1}\" vorhanden"
 }

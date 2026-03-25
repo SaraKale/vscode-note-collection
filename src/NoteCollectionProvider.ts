@@ -2092,5 +2092,75 @@ export class NoteCollectionProvider implements vscode.TreeDataProvider<TreeNoteI
         vscode.window.showInformationMessage(message);
     }
 
+    // -------------------
+    // 将文件添加到标签（用于编辑器标签页右键菜单）
+    // -------------------
+    async addFileToTag(filePath: string): Promise<void> {
+        // 获取所有标签
+        const allTags = this.getAllTags();
+        
+        if (allTags.length === 0) {
+            vscode.window.showWarningMessage(Localize.localize('msg.noTagsAvailable'));
+            return;
+        }
+        
+        // 弹出标签选择器
+        const selectedTags = await vscode.window.showQuickPick(allTags, {
+            placeHolder: Localize.localize('msg.selectMultipleTags'),
+            canPickMany: true
+        });
+        
+        if (!selectedTags || selectedTags.length === 0) {
+            return;
+        }
+        
+        const fileName = path.basename(filePath);
+        let addedCount = 0;
+        
+        for (const tag of selectedTags) {
+            // 检查该标签下是否已存在该文件
+            const existsInTag = this.noteList.some(note => 
+                note.rootPath === filePath && note.tags.includes(tag)
+            );
+            
+            if (existsInTag) {
+                vscode.window.showInformationMessage(
+                    Localize.localize('msg.fileAlreadyInTag', fileName, tag)
+                );
+                continue;
+            }
+            
+            // 检查该文件是否已经在其他标签中存在
+            const existingNote = this.noteList.find(note => note.rootPath === filePath);
+            
+            if (existingNote) {
+                // 如果文件已存在，只需添加到当前标签
+                if (!existingNote.tags.includes(tag)) {
+                    existingNote.tags.push(tag);
+                    addedCount++;
+                }
+            } else {
+                // 如果文件不存在，创建新笔记
+                const newNote: NoteItem = {
+                    name: fileName,
+                    rootPath: filePath,
+                    paths: [],
+                    tags: [tag],
+                    enabled: true
+                };
+                this.noteList.push(newNote);
+                addedCount++;
+            }
+        }
+        
+        if (addedCount > 0) {
+            this.saveData();
+            this._onDidChangeTreeData.fire();
+            vscode.window.showInformationMessage(
+                Localize.localize('msg.fileAddedToTag', fileName, selectedTags.join(', '))
+            );
+        }
+    }
+
     // =========== END ==============
 }

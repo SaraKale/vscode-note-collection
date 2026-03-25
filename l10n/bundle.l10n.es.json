@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "Actualizados {0} archivos movidos",
   "msg.folderRemoved": "Carpeta \"{0}\" eliminada: limpiados {1} archivos y {2} subcarpetas",
   "msg.refreshAllComplete": "Actualización completada: eliminados {0} archivos inexistentes, limpiadas {1} carpetas inexistentes",
-  "msg.refreshAllNoChange": "Todas las carpetas están actualizadas"
+  "refreshAllNoChange": "Todas las carpetas están actualizadas",
+  "msg.addEditorTabToTag": "Añadir a etiqueta...",
+  "msg.noTagsAvailable": "No hay etiquetas disponibles, por favor cree una etiqueta primero",
+  "msg.fileAddedToTag": "El archivo \"{0}\" ha sido añadido a la etiqueta \"{1}\"",
+  "msg.fileAlreadyInTag": "El archivo \"{0}\" ya está en la etiqueta \"{1}\""
 }

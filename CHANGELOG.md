@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.8] - 2026-03-25
+
+- Add the tag function to the right-click menu of the current tab page
+
 ## [1.0.7] - 2026-03-15
 
 - Increase note cache to enable faster note reading

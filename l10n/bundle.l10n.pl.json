@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "Zaktualizowano {0} przeniesionych plików",
   "msg.folderRemoved": "Folder \"{0}\" usunięty: wyczyszczono {1} plików i {2} podfolderów",
   "msg.refreshAllComplete": "Odświeżanie zakończone: usunięto {0} nieistniejących plików, wyczyszczono {1} nieistniejących folderów",
-  "msg.refreshAllNoChange": "Wszystkie foldery są aktualne"
+  "refreshAllNoChange": "Wszystkie foldery są aktualne",
+  "msg.addEditorTabToTag": "Dodaj do tagu...",
+  "msg.noTagsAvailable": "Brak dostępnych tagów, proszę najpierw utwórz tag",
+  "msg.fileAddedToTag": "Plik \"{0}\" został dodany do tagu \"{1}\"",
+  "msg.fileAlreadyInTag": "Plik \"{0}\" jest już w tagu \"{1}\""
 }

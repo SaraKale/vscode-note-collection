@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "Importa da testo...",
   "noteCollection.deleteItems.title": "Elimina note selezionate",
   "noteCollection.refreshFolder.title": "Aggiorna cartella",
+  "noteCollection.addEditorTabToTag.title": "Aggiungi a etichetta...",
   "configuration.title": "Raccolta note",
   "noteCollection.autoRefreshFolders.description": "Aggiorna automaticamente il contenuto della cartella quando i file vengono aggiunti o rimossi"
 }

@@ -97,5 +97,9 @@
   "msg.movedFilesSimple": "{0} taşınan dosya güncellendi",
   "msg.folderRemoved": "Klasör \"{0}\" kaldırıldı: {1} dosya ve {2} alt klasör temizlendi",
   "msg.refreshAllComplete": "Yenileme tamamlandı: {0} var olmayan dosya kaldırıldı, {1} var olmayan klasör temizlendi",
-  "msg.refreshAllNoChange": "Tüm klasörler güncel"
+  "msg.refreshAllNoChange": "Tüm klasörler güncel",
+  "msg.addEditorTabToTag": "Etikete ekle...",
+  "msg.noTagsAvailable": "Kullanılabilir etiket yok, lütfen önce bir etiket oluşturun",
+  "msg.fileAddedToTag": "Dosya \"{0}\" etiket \"{1}\" öğesine eklendi",
+  "msg.fileAlreadyInTag": "Dosya \"{0}\" zaten etiket \"{1}\" öğesinde"
 }

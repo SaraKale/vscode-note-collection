@@ -27,6 +27,7 @@
   "noteCollection.importFromText.title": "Импорт из текста...",
   "noteCollection.deleteItems.title": "Удалить выбранные заметки",
   "noteCollection.refreshFolder.title": "Обновить папку",
+  "noteCollection.addEditorTabToTag.title": "Добавить к тегу...",
   "configuration.title": "Коллекция заметок",
   "noteCollection.autoRefreshFolders.description": "Автоматически обновлять содержимое папки при добавлении или удалении файлов"
 }
